@@ -1,0 +1,30 @@
+:root {
+    --bg-color: #ffffff;
+    --bar-color: #1e88e5;
+    --current-bar-color: #ab47bc;
+    --bar-text-color: #fafafa;
+    --default-text-color: #424242;
+    --sub-text-color: #757575;
+    --button-border: #616161;
+    --button-border-active: #0d47a1;
+    --button-border-focus: #1e88e5;
+    --border-color: #e0e0e0;
+
+    @media (prefers-color-scheme: dark) {
+        --bg-color: #212121;
+        --default-text-color: #fafafa;
+        --border-color: #424242;
+        --button-border: #fafafa;
+    }
+}
+
+body {
+    margin: 0;
+
+    font-family: sans-serif;
+    font-size: 20px;
+    line-height: 1.2;
+    color: var(--default-text-color);
+
+    background-color: var(--bg-color);
+}

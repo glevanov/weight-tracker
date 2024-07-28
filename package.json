@@ -1,0 +1,58 @@
+{
+  "name": "weight-tracker",
+  "description": "An app to track my own weight",
+  "scripts": {
+    "dev": "pnpm vite",
+    "build": "pnpm vite build",
+    "lint": "pnpm run lint:prettier && pnpm run lint:eslint && pnpm run lint:tsc",
+    "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:eslint && pnpm run lint:tsc",
+    "lint:prettier": "prettier --write src",
+    "lint:prettier-check": "prettier --check src",
+    "lint:eslint": "eslint --fix src",
+    "lint:tsc": "tsc --noEmit",
+    "lint:setup-hooks": "simple-git-hooks",
+    "test": "vitest --run"
+  },
+  "author": "Grigoriy Levanov",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/glevanov/weight-tracker.git"
+  },
+  "type": "module",
+  "license": "MIT",
+  "simple-git-hooks": {
+    "pre-commit": "pnpm exec lint-staged && pnpm run lint:tsc"
+  },
+  "lint-staged": {
+    "*.{js,ts,svelte}": [
+      "prettier --write",
+      "eslint --fix"
+    ],
+    "*.css": [
+      "prettier --write"
+    ],
+    "*.{json,yaml,yml}": [
+      "prettier --write"
+    ]
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "3.0.2",
+    "@testing-library/svelte": "4.1.0",
+    "@typescript-eslint/eslint-plugin": "7.1.1",
+    "@typescript-eslint/parser": "7.1.1",
+    "eslint": "8.57.0",
+    "eslint-config-prettier": "9.1.0",
+    "eslint-plugin-svelte": "2.35.1",
+    "happy-dom": "13.7.1",
+    "lint-staged": "15.2.2",
+    "prettier": "3.2.5",
+    "prettier-plugin-svelte": "3.2.2",
+    "simple-git-hooks": "2.9.0",
+    "typescript": "5.4.2",
+    "vite": "5.1.4",
+    "vitest": "1.3.1"
+  },
+  "dependencies": {
+    "svelte": "4.2.12"
+  }
+}
