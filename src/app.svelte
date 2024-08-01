@@ -1,13 +1,15 @@
 <script lang="ts">
-  import Chart from "./chart.svelte";
+  // import Chart from "./chart.svelte";
+  import AddWeight from "./add-weight.svelte";
 </script>
 
 <div class="app">
-  <Chart />
+  <AddWeight />
+  <!-- <Chart /> -->
 </div>
 
 <style>
   .app {
-    max-height: 100svh;
+    height: 100svh;
   }
 </style>
