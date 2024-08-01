@@ -11,7 +11,8 @@
     "lint:eslint": "eslint --fix src",
     "lint:tsc": "tsc --noEmit",
     "lint:setup-hooks": "simple-git-hooks",
-    "test": "vitest --run"
+    "test": "vitest --run",
+    "postinstall": "pnpm exec simple-git-hooks"
   },
   "author": "Grigoriy Levanov",
   "repository": {
@@ -53,7 +54,7 @@
     "vitest": "2.0.4"
   },
   "dependencies": {
-    "chart.js": "^4.4.3",
+    "chart.js": "4.4.3",
     "svelte": "4.2.18",
     "svelte-chartjs": "3.1.5"
   }
