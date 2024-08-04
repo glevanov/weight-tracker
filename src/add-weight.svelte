@@ -1,4 +1,6 @@
 <script lang="ts">
+  import { onMount } from "svelte";
+
   export let handleShowGraph: () => void;
   let value = "";
 
@@ -6,13 +8,25 @@
     evt.preventDefault();
     alert("Ваш вес " + value);
   };
+
+  let ref: HTMLInputElement;
+
+  onMount(() => {
+    ref?.focus();
+  });
 </script>
 
 <div class="page">
   <form class="form" on:submit={onSubmit} autocomplete="off">
     <label class="label" for="weight-input"> Введите ваш вес: </label>
 
-    <input class="input" id="weight-input" bind:value inputmode="decimal" />
+    <input
+      class="input"
+      id="weight-input"
+      bind:value
+      inputmode="decimal"
+      bind:this={ref}
+    />
 
     <button class="button submit" type="submit">Отправить</button>
 
