@@ -41,7 +41,10 @@
 </script>
 
 <div class="page">
-  <Line data={chartData} />
+  <div class="chart">
+    <Line data={chartData} />
+  </div>
+
   <button on:click={handleShowAddWeight}>Ввести вес</button>
 </div>
 
@@ -52,8 +55,18 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    gap: 0.4em;
     padding: 1em;
     box-sizing: border-box;
+  }
+
+  .chart {
+    --button-height: 30px;
+
+    width: 100%;
+    max-height: calc(100% - var(--button-height));
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 </style>
