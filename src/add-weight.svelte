@@ -1,26 +1,21 @@
 <script lang="ts">
   let value = "";
-  let error = "";
 
   const onSubmit = (evt: Event) => {
     evt.preventDefault();
-    error = "текст ошибки";
-    alert("ошибюка");
+    alert("Ваш вес " + value);
   };
 </script>
 
 <div class="page">
-  <form class="form" on:submit={onSubmit}>
+  <form class="form" on:submit={onSubmit} autocomplete="off">
     <label class="label" for="weight-input"> Введите ваш вес: </label>
 
     <input class="input" id="weight-input" bind:value inputmode="decimal" />
 
-    <button class="submit" type="submit">Отправить</button>
-    {#if error.length > 0}
-      <div class="error">
-        {error}
-      </div>
-    {/if}
+    <button class="button submit" type="submit">Отправить</button>
+
+    <button class="button showGraph" type="button">Показать график</button>
   </form>
 </div>
 
@@ -39,7 +34,8 @@
     grid-template-areas:
       "label label"
       "input button"
-      "error error";
+      "show show";
+    grid-template-columns: auto auto;
   }
 
   .label {
@@ -50,13 +46,13 @@
     grid-area: button;
   }
 
-  .error {
-    grid-area: error;
-
-    color: red;
+  .showGraph {
+    grid-area: show;
   }
 
   .input {
     grid-area: input;
+    width: 100%;
+    box-sizing: border-box;
   }
 </style>
