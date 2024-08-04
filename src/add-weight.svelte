@@ -1,4 +1,5 @@
 <script lang="ts">
+  export let handleShowGraph: () => void;
   let value = "";
 
   const onSubmit = (evt: Event) => {
@@ -15,7 +16,9 @@
 
     <button class="button submit" type="submit">Отправить</button>
 
-    <button class="button showGraph" type="button">Показать график</button>
+    <button class="button showGraph" type="button" on:click={handleShowGraph}>
+      Показать график
+    </button>
   </form>
 </div>
 
@@ -25,10 +28,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    padding: 1em;
+    box-sizing: border-box;
   }
 
   .form {
-    max-width: 300px;
     display: grid;
     gap: 0.4em;
     grid-template-areas:
@@ -36,6 +40,8 @@
       "input button"
       "show show";
     grid-template-columns: auto auto;
+    width: 100%;
+    max-width: 400px;
   }
 
   .label {

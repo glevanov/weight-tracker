@@ -1,4 +1,6 @@
 <script lang="ts">
+  export let handleShowAddWeight: () => void;
+
   import { Line } from "svelte-chartjs";
   import { weights } from "./static-data";
 
@@ -38,4 +40,20 @@
   };
 </script>
 
-<Line data={chartData} />
+<div class="page">
+  <Line data={chartData} />
+  <button on:click={handleShowAddWeight}>Ввести вес</button>
+</div>
+
+<style>
+  .page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.4em;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+</style>
