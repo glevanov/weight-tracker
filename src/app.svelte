@@ -1,19 +1,18 @@
 <script lang="ts">
-  import Chart from "./chart.svelte";
+  import Visualization from "./visualization.svelte";
   import AddWeight from "./add-weight.svelte";
 
   type Screen = "addWeight" | "chart";
   let currentScreen: Screen = "addWeight";
-  const switchScreen = (screen: Screen) => {
-    currentScreen = screen;
-  };
+  const showChart = () => (currentScreen = "chart");
+  const showAddWeight = () => (currentScreen = "addWeight");
 </script>
 
 <div class="app">
   {#if currentScreen === "addWeight"}
-    <AddWeight handleShowGraph={() => switchScreen("chart")} />
+    <AddWeight handleShowGraph={showChart} />
   {:else if currentScreen === "chart"}
-    <Chart handleShowAddWeight={() => switchScreen("addWeight")} />
+    <Visualization handleShowAddWeight={showAddWeight} />
   {/if}
 </div>
 

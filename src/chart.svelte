@@ -1,6 +1,5 @@
 <script lang="ts">
   import { Line } from "svelte-chartjs";
-  import { weights } from "./static-data";
 
   import {
     Chart as ChartJS,
@@ -8,11 +7,19 @@
     LinearScale,
     PointElement,
     CategoryScale,
+    Tooltip,
   } from "chart.js";
 
   export let handleShowAddWeight: () => void;
+  export let weights: { weight: number; timestamp: number }[] = [];
 
-  ChartJS.register(LineElement, LinearScale, PointElement, CategoryScale);
+  ChartJS.register(
+    LineElement,
+    LinearScale,
+    PointElement,
+    CategoryScale,
+    Tooltip,
+  );
 
   const weightData: number[] = [];
   const labels: string[] = [];
@@ -31,7 +38,7 @@
     labels: labels,
     datasets: [
       {
-        label: "График веса",
+        label: "Вес",
         data: weightData,
         borderColor: "#303F9F",
         backgroundColor: "#303F9F",
