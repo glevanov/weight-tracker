@@ -1,4 +1,5 @@
-import type { Range } from "./visualization/types";
+import type { Range } from "../visualization/types";
+import type { Weight } from "./types";
 
 const apiUrl = "http://localhost:3000";
 
@@ -34,7 +35,7 @@ const mapRangeToDates = (range: Range) => {
   }
 };
 
-export const getWeights = async (range: Range) => {
+export const getWeights = async (range: Range): Promise<Weight[]> => {
   const { start, end } = mapRangeToDates(range);
   const result = await fetch(
     `${apiUrl}/weights?start=${start.toISOString()}&end=${end.toISOString()}`,
