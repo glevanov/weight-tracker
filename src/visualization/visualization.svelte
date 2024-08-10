@@ -3,15 +3,17 @@
   import { getWeights } from "../api";
   import Chart from "./chart.svelte";
   import type { Range } from "./types";
+  import { readRange, storeRange } from "./persist-range";
 
   export let handleShowAddWeight: () => void;
 
   let promise: Promise<{ weight: number; timestamp: number }[]>;
 
-  let selectedRange: Range = "14-days";
+  let selectedRange: Range = readRange() ?? "14-days";
+
   const onSelectRange = (value: Range) => {
-    console.log("here");
     selectedRange = value;
+    storeRange(value);
     promise = getWeights(selectedRange);
   };
 
