@@ -1,5 +1,5 @@
 <script lang="ts">
-  import Visualization from "./visualization.svelte";
+  import Visualization from "./visualization/visualization.svelte";
   import AddWeight from "./add-weight.svelte";
 
   type Screen = "addWeight" | "chart";
