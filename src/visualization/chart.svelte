@@ -64,29 +64,26 @@
   };
 </script>
 
-<div class="page">
-  <div class="chart">
-    <Line data={chartData} />
-  </div>
+<div class="chart">
+  <Line data={chartData} />
+</div>
 
+<form class="form">
   <select bind:value={selectedRange} on:change={handleSelect}>
     {#each selectOptions as option}
       <option value={option.value}>{option.name}</option>
     {/each}
   </select>
 
-  <button on:click={handleShowAddWeight}>Ввести вес</button>
-</div>
+  <button type="button" on:click={handleShowAddWeight}>Ввести вес</button>
+</form>
 
 <style>
-  .page {
-    height: 100%;
+  .form {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 1em;
-    box-sizing: border-box;
+    justify-content: space-between;
+    gap: 0.4em;
+    width: 100%;
   }
 
   .chart {

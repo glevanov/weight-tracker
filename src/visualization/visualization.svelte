@@ -22,10 +22,24 @@
   });
 </script>
 
-{#await promise}
-  Загружаем!
-{:then weights}
-  <Chart {handleShowAddWeight} {weights} {selectedRange} {onSelectRange} />
-{:catch error}
-  Произошла ошибка: {error.message}
-{/await}
+<div class="page">
+  {#await promise}
+    Загружаем!
+  {:then weights}
+    <Chart {handleShowAddWeight} {weights} {selectedRange} {onSelectRange} />
+  {:catch error}
+    Произошла ошибка: {error.message}
+  {/await}
+</div>
+
+<style>
+  .page {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1em;
+    box-sizing: border-box;
+  }
+</style>
