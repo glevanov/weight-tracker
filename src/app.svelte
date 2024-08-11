@@ -1,6 +1,7 @@
 <script lang="ts">
   import Visualization from "./visualization/visualization.svelte";
   import AddWeight from "./add-weight/add-weight.svelte";
+  import ToastContainer from "./ui/toast-container.svelte";
 
   type Screen = "addWeight" | "chart";
   let currentScreen: Screen = "addWeight";
@@ -14,6 +15,8 @@
   {:else if currentScreen === "chart"}
     <Visualization handleShowAddWeight={showAddWeight} />
   {/if}
+
+  <ToastContainer />
 </div>
 
 <style>

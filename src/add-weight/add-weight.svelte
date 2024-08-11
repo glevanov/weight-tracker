@@ -1,12 +1,19 @@
 <script lang="ts">
   import { onMount } from "svelte";
+  import { addToast } from "../store/toast";
+  import { addWeight } from "../api/api";
+  import type { FormEventHandler } from "svelte/elements";
 
   export let handleShowGraph: () => void;
   let value = "";
 
-  const onSubmit = (evt: Event) => {
-    evt.preventDefault();
-    alert("Ваш вес " + value);
+  const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
+    const result = await addWeight(value);
+    if (!result.isSuccess) {
+      addToast(result.error);
+    } else {
+      addToast("Вес успешно добавлен");
+    }
   };
 
   let ref: HTMLInputElement;
@@ -17,7 +24,7 @@
 </script>
 
 <div class="page">
-  <form class="form" on:submit={onSubmit} autocomplete="off">
+  <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
     <label class="label" for="weight-input"> Введите ваш вес: </label>
 
     <input

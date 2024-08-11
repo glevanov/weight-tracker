@@ -8,7 +8,7 @@
     "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:eslint && pnpm run lint:tsc",
     "lint:prettier": "prettier --write src",
     "lint:prettier-check": "prettier --check src",
-    "lint:eslint": "eslint --fix src",
+    "lint:eslint": "eslint src",
     "lint:tsc": "tsc --noEmit",
     "lint:setup-hooks": "simple-git-hooks",
     "test": "vitest --run",
@@ -55,6 +55,7 @@
   },
   "dependencies": {
     "chart.js": "4.4.3",
+    "nanoid": "5.0.7",
     "svelte": "4.2.18",
     "svelte-chartjs": "3.1.5"
   }

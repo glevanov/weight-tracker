@@ -1,33 +1,29 @@
 <script lang="ts">
-  import { onMount } from "svelte";
   import { getWeights } from "../api/api";
   import Chart from "./chart.svelte";
+  import ChartForm from "./chart-form.svelte";
   import type { Range } from "./types";
   import { readRange, storeRange } from "./persist-range";
-  import type { Weight } from "../api/types";
 
   export let handleShowAddWeight: () => void;
-
-  let promise: Promise<Weight[]>;
 
   let selectedRange: Range = readRange() ?? "14-days";
 
   const onSelectRange = (value: Range) => {
     selectedRange = value;
     storeRange(value);
-    promise = getWeights(selectedRange);
+    weightsRequest = getWeights(selectedRange);
   };
 
-  onMount(() => {
-    promise = getWeights(selectedRange);
-  });
+  let weightsRequest = getWeights(selectedRange);
 </script>
 
 <div class="page">
-  {#await promise}
+  {#await weightsRequest}
     Загружаем!
-  {:then weights}
-    <Chart {handleShowAddWeight} {weights} {selectedRange} {onSelectRange} />
+  {:then result}
+    <Chart weights={result.isSuccess ? result.data : []} />
+    <ChartForm {handleShowAddWeight} {selectedRange} {onSelectRange} />
   {:catch error}
     Произошла ошибка: {error.message}
   {/await}
