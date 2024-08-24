@@ -40,3 +40,25 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
     data: (await response.text()) ?? "Вес успешно добавлен",
   };
 };
+
+export const login = async (
+  username: string,
+  password: string,
+): Promise<Response<string>> => {
+  const response = await fetch(`${apiUrl}/login`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ username, password }),
+  });
+
+  if (!response.ok) {
+    return await extractError(response);
+  }
+
+  return {
+    isSuccess: true,
+    data: (await response.text()) ?? "Вход выполнен",
+  };
+};
