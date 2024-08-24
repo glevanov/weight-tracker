@@ -4,8 +4,9 @@
   import ChartForm from "./chart-form.svelte";
   import type { Range } from "./types";
   import { readRange, storeRange } from "./persist-range";
+  import { switchScreen } from "../store/screen";
 
-  export let handleShowAddWeight: () => void;
+  const handleShowAddWeight = () => switchScreen("addWeight");
 
   let selectedRange: Range = readRange() ?? "14-days";
 

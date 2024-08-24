@@ -3,8 +3,8 @@
   import { addToast } from "../store/toast";
   import { addWeight } from "../api/api";
   import type { FormEventHandler } from "svelte/elements";
+  import { switchScreen } from "../store/screen";
 
-  export let handleShowGraph: () => void;
   let value = "";
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
@@ -15,6 +15,8 @@
       addToast("Вес успешно добавлен");
     }
   };
+
+  const handleShowGraph = () => switchScreen("chart");
 
   let ref: HTMLInputElement;
 

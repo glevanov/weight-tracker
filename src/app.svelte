@@ -3,21 +3,20 @@
   import Visualization from "./visualization/visualization.svelte";
   import AddWeight from "./add-weight/add-weight.svelte";
   import ToastContainer from "./ui/toast-container.svelte";
+  import { currentScreen } from "./store/screen";
+  import type { Screen } from "./store/screen";
 
-  type Screen = "addWeight" | "chart" | "login";
-  let currentScreen: Screen = "login";
-  const handleLogin = () => (currentScreen = "addWeight");
-  const showChart = () => (currentScreen = "chart");
-  const showAddWeight = () => (currentScreen = "addWeight");
+  let screen: Screen;
+  currentScreen.subscribe((value) => (screen = value));
 </script>
 
 <div class="app">
-  {#if currentScreen === "login"}
-    <Login {handleLogin} />
-  {:else if currentScreen === "addWeight"}
-    <AddWeight handleShowGraph={showChart} />
-  {:else if currentScreen === "chart"}
-    <Visualization handleShowAddWeight={showAddWeight} />
+  {#if screen === "login"}
+    <Login />
+  {:else if screen === "addWeight"}
+    <AddWeight />
+  {:else if screen === "chart"}
+    <Visualization />
   {/if}
 
   <ToastContainer />

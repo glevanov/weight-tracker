@@ -1,8 +1,7 @@
 <script lang="ts">
   import { login } from "../api/api";
   import { addToast } from "../store/toast";
-
-  export let handleLogin: () => void;
+  import { switchScreen } from "../store/screen";
 
   let username = "";
   let password = "";
@@ -26,7 +25,7 @@
     if (!result.isSuccess) {
       addToast(result.error);
     } else {
-      handleLogin();
+      switchScreen("addWeight");
     }
   };
 </script>
