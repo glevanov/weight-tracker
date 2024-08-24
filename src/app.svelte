@@ -6,13 +6,14 @@
 
   type Screen = "addWeight" | "chart" | "login";
   let currentScreen: Screen = "login";
+  const handleLogin = () => (currentScreen = "addWeight");
   const showChart = () => (currentScreen = "chart");
   const showAddWeight = () => (currentScreen = "addWeight");
 </script>
 
 <div class="app">
   {#if currentScreen === "login"}
-    <Login />
+    <Login {handleLogin} />
   {:else if currentScreen === "addWeight"}
     <AddWeight handleShowGraph={showChart} />
   {:else if currentScreen === "chart"}

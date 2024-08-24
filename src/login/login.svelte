@@ -2,22 +2,32 @@
   import { login } from "../api/api";
   import { addToast } from "../store/toast";
 
+  export let handleLogin: () => void;
+
   let username = "";
   let password = "";
+  let isLoading = false;
 
   const onSubmit = async () => {
+    if (isLoading) {
+      return;
+    }
+
     const isEmpty = username.trim() === "" || password.trim() === "";
     if (isEmpty) {
       addToast("Имя пользователя и пароль не могут быть пустыми");
       return;
     }
 
+    isLoading = true;
     const result = await login(username, password);
+    isLoading = false;
+
     if (!result.isSuccess) {
       addToast(result.error);
-      return;
+    } else {
+      handleLogin();
     }
-    console.log(result);
   };
 </script>
 
