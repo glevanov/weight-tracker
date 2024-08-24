@@ -8,6 +8,10 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
   const { start, end } = mapRangeToDates(range);
   const response = await fetch(
     `${apiUrl}/weights?start=${start.toISOString()}&end=${end.toISOString()}`,
+    {
+      method: "GET",
+      credentials: "include",
+    },
   );
 
   if (!response.ok) {
@@ -29,6 +33,7 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ weight }),
+    credentials: "include",
   });
 
   if (!response.ok) {
