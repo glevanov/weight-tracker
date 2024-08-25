@@ -1,4 +1,5 @@
 <script lang="ts">
+  import InitialLoad from "./screens/initial-load/initial-load.svelte";
   import Login from "./screens/login/login.svelte";
   import Visualization from "./screens/chart/visualization.svelte";
   import AddWeight from "./screens/add-weight/add-weight.svelte";
@@ -11,7 +12,9 @@
 </script>
 
 <div class="app">
-  {#if screen === "login"}
+  {#if screen === "initialLoad"}
+    <InitialLoad />
+  {:else if screen === "login"}
     <Login />
   {:else if screen === "addWeight"}
     <AddWeight />

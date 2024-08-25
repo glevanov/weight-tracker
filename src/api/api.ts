@@ -79,7 +79,7 @@ export const checkSession = async () => {
     credentials: "include",
   });
 
-  handleAuthError(response);
+  return response.status === 200;
 };
 
 export const checkHealth = async () => {
