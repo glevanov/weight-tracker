@@ -1,10 +1,11 @@
 <script lang="ts">
-  import { getWeights } from "../api/api";
+  import { getWeights } from "../../api/api";
   import Chart from "./chart.svelte";
   import ChartForm from "./chart-form.svelte";
   import type { Range } from "./types";
   import { readRange, storeRange } from "./persist-range";
-  import { switchScreen } from "../store/screen";
+  import { switchScreen } from "../../store/screen";
+  import Page from "../../ui/page.svelte";
 
   const handleShowAddWeight = () => switchScreen("addWeight");
 
@@ -19,7 +20,7 @@
   let weightsRequest = getWeights(selectedRange);
 </script>
 
-<div class="page">
+<Page column={true}>
   {#await weightsRequest}
     Загружаем!
   {:then result}
@@ -28,16 +29,4 @@
   {:catch error}
     Произошла ошибка: {error.message}
   {/await}
-</div>
-
-<style>
-  .page {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding: 1em;
-    box-sizing: border-box;
-  }
-</style>
+</Page>

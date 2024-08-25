@@ -1,9 +1,10 @@
 <script lang="ts">
   import { onMount } from "svelte";
-  import { addToast } from "../store/toast";
-  import { addWeight } from "../api/api";
+  import { addToast } from "../../store/toast";
+  import { addWeight } from "../../api/api";
   import type { FormEventHandler } from "svelte/elements";
-  import { switchScreen } from "../store/screen";
+  import { switchScreen } from "../../store/screen";
+  import Page from "../../ui/page.svelte";
 
   let value = "";
 
@@ -25,7 +26,7 @@
   });
 </script>
 
-<div class="page">
+<Page>
   <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
     <label class="label" for="weight-input"> Введите ваш вес: </label>
 
@@ -43,18 +44,9 @@
       Показать график
     </button>
   </form>
-</div>
+</Page>
 
 <style>
-  .page {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1em;
-    box-sizing: border-box;
-  }
-
   .form {
     display: grid;
     gap: 0.4em;

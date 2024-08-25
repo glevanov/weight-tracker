@@ -1,7 +1,8 @@
 <script lang="ts">
-  import { login } from "../api/api";
-  import { addToast } from "../store/toast";
-  import { switchScreen } from "../store/screen";
+  import Page from "../../ui/page.svelte";
+  import { login } from "../../api/api";
+  import { addToast } from "../../store/toast";
+  import { switchScreen } from "../../store/screen";
 
   let username = "";
   let password = "";
@@ -30,7 +31,7 @@
   };
 </script>
 
-<div class="page">
+<Page>
   <form class="form" on:submit|preventDefault={onSubmit}>
     <label for="login">Логин</label>
     <input type="text" name="login" id="login" bind:value={username} />
@@ -45,18 +46,9 @@
 
     <button class="withGap" type="submit">Войти</button>
   </form>
-</div>
+</Page>
 
 <style>
-  .page {
-    height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1em;
-    box-sizing: border-box;
-  }
-
   .form {
     width: 100%;
     max-width: 400px;

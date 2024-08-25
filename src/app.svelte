@@ -1,7 +1,7 @@
 <script lang="ts">
-  import Login from "./login/login.svelte";
-  import Visualization from "./visualization/visualization.svelte";
-  import AddWeight from "./add-weight/add-weight.svelte";
+  import Login from "./screens/login/login.svelte";
+  import Visualization from "./screens/chart/visualization.svelte";
+  import AddWeight from "./screens/add-weight/add-weight.svelte";
   import ToastContainer from "./ui/toast-container.svelte";
   import { currentScreen } from "./store/screen";
   import type { Screen } from "./store/screen";

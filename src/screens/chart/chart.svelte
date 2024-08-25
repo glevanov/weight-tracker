@@ -9,7 +9,7 @@
     Tooltip,
   } from "chart.js";
 
-  import type { Weight } from "../api/types";
+  import type { Weight } from "../../api/types";
 
   export let weights: Weight[] = [];
 

@@ -1,4 +1,4 @@
-import type { Range } from "../visualization/types";
+import type { Range } from "../screens/chart/types";
 import type { Response, Weight } from "./types";
 import { extractError, handleAuthError, mapRangeToDates } from "./util";
 

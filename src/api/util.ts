@@ -1,4 +1,4 @@
-import type { Range } from "../visualization/types";
+import type { Range } from "../screens/chart/types";
 import type { ErrorResponse } from "./types";
 import { switchScreen } from "../store/screen";
 
