@@ -1,6 +1,6 @@
 import type { Range } from "../visualization/types";
 import type { Response, Weight } from "./types";
-import { extractError, mapRangeToDates } from "./util";
+import { extractError, handleAuthError, mapRangeToDates } from "./util";
 
 const apiUrl = "http://localhost:3000";
 
@@ -13,6 +13,8 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
       credentials: "include",
     },
   );
+
+  handleAuthError(response);
 
   if (!response.ok) {
     return await extractError(response);
@@ -35,6 +37,8 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
     body: JSON.stringify({ weight }),
     credentials: "include",
   });
+
+  handleAuthError(response);
 
   if (!response.ok) {
     return await extractError(response);
@@ -67,4 +71,19 @@ export const login = async (
     isSuccess: true,
     data: (await response.text()) ?? "Вход выполнен",
   };
+};
+
+export const checkSession = async () => {
+  const response = await fetch(`${apiUrl}/session-check`, {
+    method: "GET",
+    credentials: "include",
+  });
+
+  handleAuthError(response);
+};
+
+export const checkHealth = async () => {
+  await fetch(`${apiUrl}/health-check`, {
+    method: "GET",
+  });
 };

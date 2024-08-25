@@ -1,5 +1,6 @@
 import type { Range } from "../visualization/types";
 import type { ErrorResponse } from "./types";
+import { switchScreen } from "../store/screen";
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -38,4 +39,10 @@ export const extractError = async (
 ): Promise<ErrorResponse> => {
   const error = (await response.text()) ?? "Произошла неизвестная ошибка";
   return { isSuccess: false, error };
+};
+
+export const handleAuthError = (response: globalThis.Response) => {
+  if (response.status === 401) {
+    switchScreen("login");
+  }
 };
