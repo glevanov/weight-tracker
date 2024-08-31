@@ -83,9 +83,10 @@ export const checkSession = async () => {
   return response.status === 200;
 };
 
-const RETRIES = 5;
+const RETRIES = 10;
 const TIMEOUT = 50000;
-export const checkHealth = async () => {
+
+export const checkHealth = async (): Promise<Response<string>> => {
   for (let attempt = 1; attempt <= RETRIES; attempt++) {
     const controller = new AbortController();
     const signal = controller.signal;
@@ -100,10 +101,17 @@ export const checkHealth = async () => {
       clearTimeout(timeoutId);
 
       if (response.ok) {
-        break;
+        return {
+          isSuccess: true,
+          data: "Сервис доступен",
+        };
       }
     } catch {
       clearTimeout(timeoutId);
     }
   }
+  return {
+    isSuccess: false,
+    error: "Сервис недоступен",
+  };
 };

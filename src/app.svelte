@@ -4,6 +4,7 @@
   import Visualization from "./screens/chart/visualization.svelte";
   import AddWeight from "./screens/add-weight/add-weight.svelte";
   import ToastContainer from "./ui/toast-container.svelte";
+  import Error from "./screens/error/error.svelte";
   import { currentScreen } from "./store/screen";
   import type { Screen } from "./store/screen";
 
@@ -20,6 +21,8 @@
     <AddWeight />
   {:else if screen === "chart"}
     <Visualization />
+  {:else if screen === "error"}
+    <Error />
   {/if}
 
   <ToastContainer />

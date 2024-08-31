@@ -5,7 +5,11 @@
   import { switchScreen } from "../../store/screen";
 
   onMount(async () => {
-    await checkHealth();
+    const healthCheckResult = await checkHealth();
+    if (!healthCheckResult.isSuccess) {
+      switchScreen("error");
+      return;
+    }
 
     const hasSession = await checkSession();
 
@@ -17,4 +21,6 @@
   });
 </script>
 
-<Page>Загружаемся! Это может занять около минуты.</Page>
+<Page
+  >Прогреваем сервер! Так как он бесплатный, это может занять несколько минут.</Page
+>
