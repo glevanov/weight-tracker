@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "pnpm vite",
     "build": "pnpm vite build",
+    "build:gh-pages": "pnpm vite build --base /weight-tracker/",
     "lint": "pnpm run lint:prettier && pnpm run lint:eslint && pnpm run lint:tsc",
     "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:eslint && pnpm run lint:tsc",
     "lint:prettier": "prettier --write src",
