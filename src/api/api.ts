@@ -83,8 +83,27 @@ export const checkSession = async () => {
   return response.status === 200;
 };
 
+const RETRIES = 5;
+const TIMEOUT = 50000;
 export const checkHealth = async () => {
-  await fetch(`${apiUrl}/health-check`, {
-    method: "GET",
-  });
+  for (let attempt = 1; attempt <= RETRIES; attempt++) {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    const timeoutId = setTimeout(() => controller.abort(), TIMEOUT);
+
+    try {
+      const response = await fetch(`${apiUrl}/health-check`, {
+        method: "GET",
+        signal,
+      });
+
+      clearTimeout(timeoutId);
+
+      if (response.ok) {
+        break;
+      }
+    } catch {
+      clearTimeout(timeoutId);
+    }
+  }
 };
