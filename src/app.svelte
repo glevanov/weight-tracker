@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Fade from "./ui/fade.svelte";
   import InitialLoad from "./screens/initial-load/initial-load.svelte";
   import Login from "./screens/login/login.svelte";
   import Visualization from "./screens/chart/visualization.svelte";
@@ -14,15 +15,25 @@
 
 <div class="app">
   {#if screen === "initialLoad"}
-    <InitialLoad />
+    <Fade>
+      <InitialLoad />
+    </Fade>
   {:else if screen === "login"}
-    <Login />
+    <Fade>
+      <Login />
+    </Fade>
   {:else if screen === "addWeight"}
-    <AddWeight />
+    <Fade>
+      <AddWeight />
+    </Fade>
   {:else if screen === "chart"}
-    <Visualization />
+    <Fade>
+      <Visualization />
+    </Fade>
   {:else if screen === "error"}
-    <Error />
+    <Fade>
+      <Error />
+    </Fade>
   {/if}
 
   <ToastContainer />
