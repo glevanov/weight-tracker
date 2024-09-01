@@ -2,6 +2,7 @@
   "compilerOptions": {
     "isolatedModules": true,
     "lib": ["dom", "esnext"],
+    "types": ["vite/client"],
     "module": "esnext",
     "moduleResolution": "bundler",
     "noEmit": true,
