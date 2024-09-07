@@ -1,5 +1,5 @@
 import type { Range } from "../screens/chart/types";
-import type { ErrorResponse } from "./types";
+import type { Response } from "./types";
 import { switchScreen } from "../store/screen";
 
 const DAY = 24 * 60 * 60 * 1000;
@@ -34,11 +34,38 @@ export const mapRangeToDates = (range: Range) => {
   }
 };
 
-export const extractError = async (
+const validateResponse = <Data>(
+  response: unknown,
+): response is Response<Data> => {
+  if (typeof response !== "object" || response === null) {
+    return false;
+  }
+
+  if (!("isSuccess" in response) || typeof response.isSuccess !== "boolean") {
+    return false;
+  }
+
+  if (response.isSuccess) {
+    return "data" in response;
+  } else {
+    return "error" in response;
+  }
+};
+
+export const extractResult = async <Data>(
   response: globalThis.Response,
-): Promise<ErrorResponse> => {
-  const error = (await response.text()) ?? "Произошла неизвестная ошибка";
-  return { isSuccess: false, error };
+): Promise<Response<Data>> => {
+  try {
+    const result = await response.json();
+    const isValid = validateResponse<Data>(result);
+    if (!isValid) {
+      throw new Error("Invalid response");
+    }
+
+    return result;
+  } catch {
+    return { isSuccess: false, error: "Произошла неизвестная ошибка" };
+  }
 };
 
 export const handleAuthError = (response: globalThis.Response) => {

@@ -1,6 +1,6 @@
 import type { Range } from "../screens/chart/types";
 import type { Response, Weight } from "./types";
-import { extractError, handleAuthError, mapRangeToDates } from "./util";
+import { extractResult, handleAuthError, mapRangeToDates } from "./util";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -16,16 +16,7 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
 
   handleAuthError(response);
 
-  if (response.status !== 200) {
-    return await extractError(response);
-  }
-
-  const weights = await response.json();
-
-  return {
-    isSuccess: true,
-    data: weights,
-  };
+  return await extractResult(response);
 };
 
 export const addWeight = async (weight: string): Promise<Response<string>> => {
@@ -40,14 +31,7 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
 
   handleAuthError(response);
 
-  if (response.status !== 201) {
-    return await extractError(response);
-  }
-
-  return {
-    isSuccess: true,
-    data: (await response.text()) ?? "Вес успешно добавлен",
-  };
+  return await extractResult(response);
 };
 
 export const login = async (
@@ -63,14 +47,7 @@ export const login = async (
     credentials: "include",
   });
 
-  if (response.status !== 200) {
-    return await extractError(response);
-  }
-
-  return {
-    isSuccess: true,
-    data: (await response.text()) ?? "Вход выполнен",
-  };
+  return await extractResult(response);
 };
 
 export const checkSession = async () => {
