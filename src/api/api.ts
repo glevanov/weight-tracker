@@ -2,8 +2,7 @@ import type { Range } from "../screens/chart/types";
 import type { Response, Weight } from "./types";
 import { extractError, handleAuthError, mapRangeToDates } from "./util";
 
-// const apiUrl = "http://localhost:3000";
-const apiUrl = "https://weight-tracker-service.onrender.com";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
   const { start, end } = mapRangeToDates(range);

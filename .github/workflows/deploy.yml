@@ -28,6 +28,8 @@ jobs:
       #run: pnpm run test
       - name: Build
         run: pnpm run build:gh-pages
+        env:
+          VITE_API_URL: https://weight-tracker-service.onrender.com
       - name: Deploy
         uses: crazy-max/ghaction-github-pages@v4
         with:
