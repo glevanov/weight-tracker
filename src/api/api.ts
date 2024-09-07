@@ -17,7 +17,7 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
 
   handleAuthError(response);
 
-  if (!response.ok) {
+  if (response.status !== 200) {
     return await extractError(response);
   }
 
@@ -41,7 +41,7 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
 
   handleAuthError(response);
 
-  if (!response.ok) {
+  if (response.status !== 201) {
     return await extractError(response);
   }
 
@@ -64,7 +64,7 @@ export const login = async (
     credentials: "include",
   });
 
-  if (!response.ok) {
+  if (response.status !== 200) {
     return await extractError(response);
   }
 
@@ -100,7 +100,7 @@ export const checkHealth = async (): Promise<Response<string>> => {
 
       clearTimeout(timeoutId);
 
-      if (response.ok) {
+      if (response.status === 200) {
         return {
           isSuccess: true,
           data: "Сервис доступен",
