@@ -1,8 +1,9 @@
 import { ru } from "./locales/ru";
 import { en } from "./locales/en";
 import { sv } from "./locales/sv";
+import { zh } from "./locales/zh";
 
-type Lang = "ru" | "en" | "sv";
+type Lang = "ru" | "en" | "sv" | "zh";
 
 /**
  * Generic type to get a path of a nested object
@@ -38,10 +39,11 @@ const locales: Record<Lang, Locale> = {
   ru,
   en,
   sv,
+  zh,
 };
 
 export const i18n = (path: Path<Locale>): string => {
-  const selectedLocale: Lang = "sv";
+  const selectedLocale: Lang = "en";
 
   return traverse(locales[selectedLocale], path);
 };
