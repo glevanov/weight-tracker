@@ -1,6 +1,7 @@
 import type { Range } from "../screens/chart/types";
 import type { Response, Weight } from "./types";
 import { extractResult, handleAuthError, mapRangeToDates } from "./util";
+import { getAuthHeader, saveToken } from "./token";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -10,7 +11,9 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
     `${apiUrl}/weights?start=${start.toISOString()}&end=${end.toISOString()}`,
     {
       method: "GET",
-      credentials: "include",
+      headers: {
+        Authorization: getAuthHeader(),
+      },
     },
   );
 
@@ -24,9 +27,9 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      Authorization: getAuthHeader(),
     },
     body: JSON.stringify({ weight }),
-    credentials: "include",
   });
 
   handleAuthError(response);
@@ -47,13 +50,21 @@ export const login = async (
     credentials: "include",
   });
 
-  return await extractResult(response);
+  const result = await extractResult<string>(response);
+
+  if (result.isSuccess) {
+    saveToken(result.data);
+  }
+
+  return result;
 };
 
 export const checkSession = async () => {
   const response = await fetch(`${apiUrl}/session-check`, {
     method: "GET",
-    credentials: "include",
+    headers: {
+      Authorization: getAuthHeader(),
+    },
   });
 
   return response.status === 200;
