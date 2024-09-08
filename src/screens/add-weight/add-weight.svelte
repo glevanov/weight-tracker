@@ -5,7 +5,7 @@
   import type { FormEventHandler } from "svelte/elements";
   import { switchScreen } from "../../store/screen";
   import Page from "../../ui/page.svelte";
-  import { i18n } from "../../i18n";
+  import { i18n } from "../../i18n/i18n";
 
   let value = "";
 

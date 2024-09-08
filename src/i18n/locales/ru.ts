@@ -1,34 +1,4 @@
-type Lang = "ru";
-
-/**
- * Generic type to get a path of a nested object
- */
-type Path<T> = T extends object
-  ? {
-      [K in keyof T]: K extends string
-        ? T[K] extends object
-          ? `${K}` | `${K}.${Path<T[K]>}`
-          : `${K}`
-        : never;
-    }[keyof T]
-  : never;
-
-const traverse = (obj: Locale, path: Path<Locale>): string => {
-  const parts = path.split(".");
-
-  let value: Locale | Locale[keyof Locale] | string = obj;
-
-  for (const part of parts) {
-    if (typeof value !== "string") {
-      // @ts-expect-error difficult to type
-      value = value[part];
-    }
-  }
-
-  return value as string;
-};
-
-const ru = {
+export const ru = {
   login: {
     login: "Логин",
     password: "Пароль",
@@ -56,16 +26,4 @@ const ru = {
     failed:
       "Не удалось прогреть сервер. Попробуй обновить страницу или зайти позже.",
   },
-};
-
-type Locale = typeof ru;
-
-const locales: Record<Lang, Locale> = {
-  ru,
-};
-
-export const i18n = (path: Path<Locale>): string => {
-  const selectedLocale: Lang = "ru";
-
-  return traverse(locales[selectedLocale], path);
 };

@@ -1,6 +1,6 @@
 <script lang="ts">
   import Page from "../../ui/page.svelte";
-  import { i18n } from "../../i18n";
+  import { i18n } from "../../i18n/i18n";
 </script>
 
 <Page>

@@ -1,7 +1,7 @@
 <script lang="ts">
   import type { Range } from "./types";
   import type { ChangeEventHandler } from "svelte/elements";
-  import { i18n } from "../../i18n";
+  import { i18n } from "../../i18n/i18n";
 
   export let handleShowAddWeight: () => void;
   export let selectedRange: Range;

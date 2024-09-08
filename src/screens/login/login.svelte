@@ -3,7 +3,7 @@
   import { login } from "../../api/api";
   import { addToast } from "../../store/toast";
   import { switchScreen } from "../../store/screen";
-  import { i18n } from "../../i18n";
+  import { i18n } from "../../i18n/i18n";
 
   let username = "";
   let password = "";
