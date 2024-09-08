@@ -5,6 +5,7 @@
   import type { FormEventHandler } from "svelte/elements";
   import { switchScreen } from "../../store/screen";
   import Page from "../../ui/page.svelte";
+  import { i18n } from "../../i18n";
 
   let value = "";
 
@@ -13,7 +14,7 @@
     if (!result.isSuccess) {
       addToast(result.error);
     } else {
-      addToast("Вес успешно добавлен");
+      addToast(i18n("addWeight.success"));
     }
   };
 
@@ -28,7 +29,7 @@
 
 <Page>
   <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
-    <label class="label" for="weight-input"> Введите ваш вес: </label>
+    <label class="label" for="weight-input">{i18n("addWeight.header")}</label>
 
     <input
       class="input"
@@ -38,10 +39,12 @@
       bind:this={ref}
     />
 
-    <button class="button submit" type="submit">Отправить</button>
+    <button class="button submit" type="submit"
+      >{i18n("addWeight.submit")}</button
+    >
 
     <button class="button showGraph" type="button" on:click={handleShowGraph}>
-      Показать график
+      {i18n("addWeight.showGraph")}
     </button>
   </form>
 </Page>

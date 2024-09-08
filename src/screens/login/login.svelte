@@ -3,6 +3,7 @@
   import { login } from "../../api/api";
   import { addToast } from "../../store/toast";
   import { switchScreen } from "../../store/screen";
+  import { i18n } from "../../i18n";
 
   let username = "";
   let password = "";
@@ -15,7 +16,7 @@
 
     const isEmpty = username.trim() === "" || password.trim() === "";
     if (isEmpty) {
-      addToast("Имя пользователя и пароль не могут быть пустыми");
+      addToast(i18n("login.emptyCredentials"));
       return;
     }
 
@@ -33,10 +34,10 @@
 
 <Page>
   <form class="form" on:submit|preventDefault={onSubmit}>
-    <label for="login">Логин</label>
+    <label for="login">{i18n("login.login")}</label>
     <input type="text" name="login" id="login" bind:value={username} />
 
-    <label class="withGap" for="password">Пароль</label>
+    <label class="withGap" for="password">{i18n("login.password")}</label>
     <input
       type="password"
       name="password"
@@ -44,7 +45,7 @@
       bind:value={password}
     />
 
-    <button class="withGap" type="submit">Войти</button>
+    <button class="withGap" type="submit">{i18n("login.submit")}</button>
   </form>
 </Page>
 

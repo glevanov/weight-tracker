@@ -4,6 +4,7 @@
   import { checkHealth, checkSession } from "../../api/api";
   import { switchScreen } from "../../store/screen";
   import cats from "./cats.webp";
+  import { i18n } from "../../i18n";
 
   onMount(async () => {
     const healthCheckResult = await checkHealth();
@@ -24,7 +25,7 @@
 
 <Page column={true}>
   <img class="cats" src={cats} alt="" />
-  <span class="text">Прогреваем сервер! Это может занять несколько минут.</span>
+  <span class="text">{i18n("initialLoading.loading")}</span>
 </Page>
 
 <style>

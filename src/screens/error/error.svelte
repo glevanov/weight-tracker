@@ -1,10 +1,11 @@
 <script lang="ts">
   import Page from "../../ui/page.svelte";
+  import { i18n } from "../../i18n";
 </script>
 
 <Page>
   <span class="text">
-    Не удалось прогреть сервер. Попробуй обновить страницу или зайти позже.
+    {i18n("initialLoading.failed")}
   </span>
 </Page>
 

@@ -6,6 +6,7 @@
   import { readRange, storeRange } from "./persist-range";
   import { switchScreen } from "../../store/screen";
   import Page from "../../ui/page.svelte";
+  import { i18n } from "../../i18n";
 
   const handleShowAddWeight = () => switchScreen("addWeight");
 
@@ -22,11 +23,11 @@
 
 <Page column={true}>
   {#await weightsRequest}
-    Загружаем!
+    {i18n("chart.loading")}
   {:then result}
     <Chart weights={result.isSuccess ? result.data : []} />
     <ChartForm {handleShowAddWeight} {selectedRange} {onSelectRange} />
   {:catch error}
-    Произошла ошибка: {error.message}
+    {i18n("chart.errorOccurred")}: {error.message}
   {/await}
 </Page>
