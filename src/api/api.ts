@@ -1,6 +1,11 @@
 import type { Range } from "../screens/chart/types";
 import type { Response, Weight } from "./types";
-import { extractResult, handleAuthError, mapRangeToDates } from "./util";
+import {
+  extractResult,
+  getAcceptLanguage,
+  handleAuthError,
+  mapRangeToDates,
+} from "./util";
 import { getAuthHeader, saveToken } from "./token";
 
 const apiUrl = import.meta.env.VITE_API_URL;
@@ -13,6 +18,7 @@ export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
       method: "GET",
       headers: {
         Authorization: getAuthHeader(),
+        "Accept-Language": getAcceptLanguage(),
       },
     },
   );
@@ -28,6 +34,7 @@ export const addWeight = async (weight: string): Promise<Response<string>> => {
     headers: {
       "Content-Type": "application/json",
       Authorization: getAuthHeader(),
+      "Accept-Language": getAcceptLanguage(),
     },
     body: JSON.stringify({ weight }),
   });
@@ -45,6 +52,7 @@ export const login = async (
     method: "POST",
     headers: {
       "Content-Type": "application/json",
+      "Accept-Language": getAcceptLanguage(),
     },
     body: JSON.stringify({ username, password }),
     credentials: "include",
@@ -64,6 +72,7 @@ export const checkSession = async () => {
     method: "GET",
     headers: {
       Authorization: getAuthHeader(),
+      "Accept-Language": getAcceptLanguage(),
     },
   });
 
@@ -82,6 +91,9 @@ export const checkHealth = async (): Promise<Response<string>> => {
     try {
       const response = await fetch(`${apiUrl}/health-check`, {
         method: "GET",
+        headers: {
+          "Accept-Language": getAcceptLanguage(),
+        },
         signal,
       });
 

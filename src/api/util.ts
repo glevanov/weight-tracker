@@ -1,6 +1,9 @@
+import { get } from "svelte/store";
+
 import type { Range } from "../screens/chart/types";
 import type { Response } from "./types";
 import { switchScreen } from "../store/screen";
+import { language } from "../store/language";
 
 const DAY = 24 * 60 * 60 * 1000;
 
@@ -73,3 +76,5 @@ export const handleAuthError = (response: globalThis.Response) => {
     switchScreen("login");
   }
 };
+
+export const getAcceptLanguage = () => get(language);
