@@ -21,7 +21,15 @@ export const readLanguageFromNavigator = (): Lang | null => {
 
   return null;
 };
+
 const supportedLocales: Set<Lang> = new Set(["ru", "en", "sv", "zh-tw"]);
 
 export const isSupported = (lang: unknown): lang is Lang =>
   supportedLocales.has(lang as Lang);
+
+export const langToLocaleString: { [key in Lang]: Intl.LocalesArgument } = {
+  en: "en-US",
+  sv: "sv-SE",
+  ru: "ru-RU",
+  "zh-tw": "zh-TW",
+};

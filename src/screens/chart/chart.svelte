@@ -10,6 +10,9 @@
   } from "chart.js";
 
   import type { Weight } from "../../api/types";
+  import type { Lang } from "../../i18n/i18n";
+  import { language } from "../../store/language";
+  import { langToLocaleString } from "../../i18n/util";
 
   export let weights: Weight[] = [];
 
@@ -21,25 +24,26 @@
     Tooltip,
   );
 
-  const weightData: number[] = [];
-  const labels: string[] = [];
+  let lang: Lang;
+  language.subscribe((value) => (lang = value));
 
-  for (const entry of weights) {
-    weightData.push(entry.weight);
-    labels.push(
-      new Date(entry.timestamp).toLocaleDateString("ru-RU", {
-        month: "short",
-        day: "numeric",
-      }),
-    );
-  }
+  let data: number[];
+  $: data = weights.map((entry) => entry.weight);
 
-  const chartData = {
-    labels: labels,
+  let labels: string[];
+  $: labels = weights.map((entry) =>
+    new Date(entry.timestamp).toLocaleDateString(langToLocaleString[lang], {
+      month: "short",
+      day: "numeric",
+    }),
+  );
+
+  $: chartData = {
+    labels,
     datasets: [
       {
         label: "Вес",
-        data: weightData,
+        data,
         borderColor: "#303F9F",
         backgroundColor: "#303F9F",
       },

@@ -7,7 +7,8 @@
   export let selectedRange: Range;
   export let onSelectRange: (value: Range) => void;
 
-  const selectOptions: { value: Range; name: string }[] = [
+  let selectOptions: { value: Range; name: string }[];
+  $: selectOptions = [
     { value: "14-days", name: $i18n("chart.twoWeeks") },
     { value: "30-days", name: $i18n("chart.month") },
     { value: "90-days", name: $i18n("chart.quarter") },
