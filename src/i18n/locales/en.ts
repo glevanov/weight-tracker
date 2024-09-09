@@ -1,6 +1,7 @@
 import type { Locale } from "../i18n";
 
 export const en: Locale = {
+  name: "English",
   login: {
     login: "Login",
     password: "Password",

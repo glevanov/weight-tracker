@@ -5,7 +5,7 @@
   import type { FormEventHandler } from "svelte/elements";
   import { switchScreen } from "../../store/screen";
   import Page from "../../ui/page.svelte";
-  import { i18n } from "../../i18n/i18n";
+  import { i18n } from "../../store/language";
 
   let value = "";
 
@@ -14,7 +14,7 @@
     if (!result.isSuccess) {
       addToast(result.error);
     } else {
-      addToast(i18n("addWeight.success"));
+      addToast($i18n("addWeight.success"));
     }
   };
 
@@ -29,7 +29,7 @@
 
 <Page>
   <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
-    <label class="label" for="weight-input">{i18n("addWeight.header")}</label>
+    <label class="label" for="weight-input">{$i18n("addWeight.header")}</label>
 
     <input
       class="input"
@@ -40,11 +40,11 @@
     />
 
     <button class="button submit" type="submit"
-      >{i18n("addWeight.submit")}</button
+      >{$i18n("addWeight.submit")}</button
     >
 
     <button class="button showGraph" type="button" on:click={handleShowGraph}>
-      {i18n("addWeight.showGraph")}
+      {$i18n("addWeight.showGraph")}
     </button>
   </form>
 </Page>

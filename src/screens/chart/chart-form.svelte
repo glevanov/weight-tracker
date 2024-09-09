@@ -1,18 +1,18 @@
 <script lang="ts">
   import type { Range } from "./types";
   import type { ChangeEventHandler } from "svelte/elements";
-  import { i18n } from "../../i18n/i18n";
+  import { i18n } from "../../store/language";
 
   export let handleShowAddWeight: () => void;
   export let selectedRange: Range;
   export let onSelectRange: (value: Range) => void;
 
   const selectOptions: { value: Range; name: string }[] = [
-    { value: "14-days", name: i18n("chart.twoWeeks") },
-    { value: "30-days", name: i18n("chart.month") },
-    { value: "90-days", name: i18n("chart.quarter") },
-    { value: "365-days", name: i18n("chart.year") },
-    { value: "all-time", name: i18n("chart.allData") },
+    { value: "14-days", name: $i18n("chart.twoWeeks") },
+    { value: "30-days", name: $i18n("chart.month") },
+    { value: "90-days", name: $i18n("chart.quarter") },
+    { value: "365-days", name: $i18n("chart.year") },
+    { value: "all-time", name: $i18n("chart.allData") },
   ];
 
   const handleSelect: ChangeEventHandler<HTMLSelectElement> = (event) => {
@@ -28,9 +28,9 @@
     {/each}
   </select>
 
-  <button type="button" on:click={handleShowAddWeight}
-    >{i18n("chart.addWeight")}</button
-  >
+  <button type="button" on:click={handleShowAddWeight}>
+    {$i18n("chart.addWeight")}
+  </button>
 </form>
 
 <style>

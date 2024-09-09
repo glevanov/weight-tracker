@@ -1,4 +1,5 @@
 export const ru = {
+  name: "Русский",
   login: {
     login: "Логин",
     password: "Пароль",
