@@ -8,14 +8,14 @@ export type Lang = "ru" | "en" | "sv" | "zh-tw";
 /**
  * Generic type to get a path of a nested object
  */
-type Path<T> = T extends object
+type Path<Type> = Type extends object
   ? {
-      [K in keyof T]: K extends string
-        ? T[K] extends object
-          ? `${K}` | `${K}.${Path<T[K]>}`
-          : `${K}`
+      [Key in keyof Type]: Key extends string
+        ? Type[Key] extends object
+          ? `${Key}` | `${Key}.${Path<Type[Key]>}`
+          : `${Key}`
         : never;
-    }[keyof T]
+    }[keyof Type]
   : never;
 
 const traverse = (obj: Locale, path: Path<Locale>): string => {
