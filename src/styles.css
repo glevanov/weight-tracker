@@ -1,20 +1,20 @@
 :root {
   --bg-color: #ffffff;
-  --bar-color: #1e88e5;
-  --current-bar-color: #ab47bc;
-  --bar-text-color: #fafafa;
+
   --default-text-color: #424242;
-  --sub-text-color: #757575;
-  --button-border: #616161;
-  --button-border-active: #0d47a1;
-  --button-border-focus: #1e88e5;
-  --border-color: #e0e0e0;
+
+  --button-bg: #0c66e4;
+  --button-color: #ffffff;
+  --button-hover: #0055cc;
 
   @media (prefers-color-scheme: dark) {
-    --bg-color: #212121;
+    --bg-color: #1d2125;
+
     --default-text-color: #fafafa;
-    --border-color: #424242;
-    --button-border: #fafafa;
+
+    --button-bg: #579dff;
+    --button-color: #1d2125;
+    --button-hover: #85b8ff;
   }
 }
 
@@ -41,26 +41,16 @@ button {
 
   border-radius: 4px;
 
-  color: #ffffff;
+  color: var(--button-color);
 
   border: none;
 
   cursor: pointer;
 
-  background-color: #0c66e4;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #579dff;
-
-    color: #1d2125;
-  }
+  background-color: var(--button-bg);
 }
 
 .g-button:hover,
 .g-button:focus {
-  background-color: #0055cc;
-
-  @media (prefers-color-scheme: dark) {
-    background-color: #85b8ff;
-  }
+  background-color: var(--button-hover);
 }
