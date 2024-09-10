@@ -29,7 +29,7 @@
     {/each}
   </select>
 
-  <button type="button" on:click={handleShowAddWeight}>
+  <button class="g-button" type="button" on:click={handleShowAddWeight}>
     {$i18n("chart.addWeight")}
   </button>
 </form>

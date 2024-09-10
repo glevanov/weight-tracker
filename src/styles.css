@@ -35,3 +35,32 @@ textarea,
 button {
   font: inherit;
 }
+
+.g-button {
+  padding: 4px 20px;
+
+  border-radius: 4px;
+
+  color: #ffffff;
+
+  border: none;
+
+  cursor: pointer;
+
+  background-color: #0c66e4;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #579dff;
+
+    color: #1d2125;
+  }
+}
+
+.g-button:hover,
+.g-button:focus {
+  background-color: #0055cc;
+
+  @media (prefers-color-scheme: dark) {
+    background-color: #85b8ff;
+  }
+}

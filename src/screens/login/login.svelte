@@ -45,7 +45,9 @@
       bind:value={password}
     />
 
-    <button class="withGap" type="submit">{$i18n("login.submit")}</button>
+    <button class="g-button withGap" type="submit"
+      >{$i18n("login.submit")}</button
+    >
   </form>
 </Page>
 

@@ -39,11 +39,15 @@
       bind:this={ref}
     />
 
-    <button class="button submit" type="submit"
+    <button class="g-button button submit" type="submit"
       >{$i18n("addWeight.submit")}</button
     >
 
-    <button class="button showGraph" type="button" on:click={handleShowGraph}>
+    <button
+      class="g-button button showGraph"
+      type="button"
+      on:click={handleShowGraph}
+    >
       {$i18n("addWeight.showGraph")}
     </button>
   </form>
