@@ -20,6 +20,8 @@
     border-radius: 0.2rem;
 
     color: var(--inverse-text-color);
+
+    pointer-events: auto;
   }
 
   .error {
