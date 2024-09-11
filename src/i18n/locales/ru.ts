@@ -11,6 +11,7 @@ export const ru = {
     success: "Вес успешно добавлен",
     submit: "Отправить",
     showGraph: "Показать график",
+    empty: "Вес не может быть пустым",
   },
   chart: {
     twoWeeks: "Две недели",

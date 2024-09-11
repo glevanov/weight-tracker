@@ -13,6 +13,7 @@ export const en: Locale = {
     success: "Weight added successfully",
     submit: "Submit",
     showGraph: "Show graph",
+    empty: "Weight cannot be empty",
   },
   chart: {
     twoWeeks: "Two weeks",

@@ -13,6 +13,7 @@ export const zhTW: Locale = {
     success: "體重已成功添加",
     submit: "提交",
     showGraph: "顯示圖表",
+    empty: "重量不能為空",
   },
   chart: {
     twoWeeks: "兩週",

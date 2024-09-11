@@ -13,6 +13,7 @@ export const sv: Locale = {
     success: "Vikt tillagd framgångsrikt",
     submit: "Skicka",
     showGraph: "Visa graf",
+    empty: "Vikt kan inte vara tom",
   },
   chart: {
     twoWeeks: "Två veckor",

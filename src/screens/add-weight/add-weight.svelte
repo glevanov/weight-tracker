@@ -10,6 +10,11 @@
   let value = "";
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
+    if (value.trim() === "") {
+      addToast($i18n("addWeight.empty"), "error");
+      return;
+    }
+
     const result = await addWeight(value);
     if (!result.isSuccess) {
       addToast(result.error, "error");
