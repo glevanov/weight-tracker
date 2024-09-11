@@ -13,15 +13,25 @@
     display: flex;
     align-items: center;
     width: 100%;
-    max-width: 20rem;
-    margin: 0 auto 0.5rem auto;
-    padding: 0.75rem 1.5rem;
+    max-width: 400px;
+    margin: 0 auto 16px auto;
+    padding: 16px;
 
-    border-radius: 0.2rem;
+    border-radius: 4px;
+    box-shadow:
+      0 8px 12px #091e4226,
+      0 0 1px #091e424f;
 
     color: var(--inverse-text-color);
 
     pointer-events: auto;
+
+    @media (prefers-color-scheme: dark) {
+      box-shadow:
+        0 0 0 1px #39424a,
+        0 8px 12px #0304045c,
+        0 0 1px 1px #03040480;
+    }
   }
 
   .error {

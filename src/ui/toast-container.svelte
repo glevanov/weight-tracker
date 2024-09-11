@@ -20,7 +20,7 @@
     right: 0;
     width: 100%;
     display: flex;
-    margin-top: 1rem;
+    margin-top: 16px;
     justify-content: center;
     flex-direction: column;
     z-index: 1;
