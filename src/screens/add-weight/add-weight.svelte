@@ -12,9 +12,9 @@
   const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
     const result = await addWeight(value);
     if (!result.isSuccess) {
-      addToast(result.error);
+      addToast(result.error, "error");
     } else {
-      addToast($i18n("addWeight.success"));
+      addToast($i18n("addWeight.success"), "success");
     }
   };
 

@@ -16,7 +16,7 @@
 
     const isEmpty = username.trim() === "" || password.trim() === "";
     if (isEmpty) {
-      addToast($i18n("login.emptyCredentials"));
+      addToast($i18n("login.emptyCredentials"), "error");
       return;
     }
 
@@ -25,7 +25,7 @@
     isLoading = false;
 
     if (!result.isSuccess) {
-      addToast(result.error);
+      addToast(result.error, "error");
     } else {
       switchScreen("addWeight");
     }

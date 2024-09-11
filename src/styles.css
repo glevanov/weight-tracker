@@ -2,6 +2,7 @@
   --bg-color: #ffffff;
 
   --default-text-color: #172b4d;
+  --inverse-text-color: #ffffff;
 
   --outline: #388bff;
 
@@ -18,6 +19,7 @@
     --bg-color: #1d2125;
 
     --default-text-color: #b6c2cf;
+    --inverse-text-color: #1d2125;
 
     --outline: #85b8ff;
 

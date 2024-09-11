@@ -7,7 +7,7 @@
 {#if $toasts}
   <section>
     {#each $toasts as toast (toast.id)}
-      <Toast>{toast.message}</Toast>
+      <Toast type={toast.type}>{toast.message}</Toast>
     {/each}
   </section>
 {/if}
