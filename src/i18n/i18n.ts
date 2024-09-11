@@ -1,9 +1,8 @@
 import { ru } from "./locales/ru";
 import { en } from "./locales/en";
 import { sv } from "./locales/sv";
-import { zhTW } from "./locales/zh-tw";
 
-export type Lang = "ru" | "en" | "sv" | "zh-tw";
+export type Lang = "ru" | "en" | "sv";
 
 /**
  * Generic type to get a path of a nested object
@@ -39,7 +38,6 @@ const locales: Record<Lang, Locale> = {
   ru,
   en,
   sv,
-  "zh-tw": zhTW,
 };
 
 export const i18n = (lang: Lang, path: Path<Locale>): string => {
