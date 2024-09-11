@@ -8,14 +8,22 @@
   import { i18n } from "../../store/language";
 
   let value = "";
+  let isAdding = false;
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
+    if (isAdding) {
+      return;
+    }
+
     if (value.trim() === "") {
       addToast($i18n("addWeight.empty"), "error");
       return;
     }
 
+    isAdding = true;
     const result = await addWeight(value);
+    isAdding = false;
+
     if (!result.isSuccess) {
       addToast(result.error, "error");
     } else {
