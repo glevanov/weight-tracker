@@ -19,7 +19,7 @@
   language.subscribe((value) => (lang = value));
 </script>
 
-<select bind:value={lang} on:change={handleSelect}>
+<select class="g-select" bind:value={lang} on:change={handleSelect}>
   {#each selectOptions as option}
     <option value={option.value}>{option.name}</option>
   {/each}

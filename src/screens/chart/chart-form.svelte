@@ -23,7 +23,7 @@
 </script>
 
 <form class="form">
-  <select bind:value={selectedRange} on:change={handleSelect}>
+  <select class="g-select" bind:value={selectedRange} on:change={handleSelect}>
     {#each selectOptions as option}
       <option value={option.value}>{option.name}</option>
     {/each}
