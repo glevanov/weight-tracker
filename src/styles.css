@@ -1,20 +1,34 @@
 :root {
   --bg-color: #ffffff;
 
-  --default-text-color: #424242;
+  --default-text-color: #172b4d;
+
+  --outline: #388bff;
 
   --button-bg: #0c66e4;
   --button-color: #ffffff;
   --button-hover: #0055cc;
 
+  --input-bg: #ffffff;
+  --input-bg-hover: #f7f8f9;
+  --input-border: #8590a2;
+  --input-border-focus: #388bff;
+
   @media (prefers-color-scheme: dark) {
     --bg-color: #1d2125;
 
-    --default-text-color: #fafafa;
+    --default-text-color: #b6c2cf;
+
+    --outline: #85b8ff;
 
     --button-bg: #579dff;
     --button-color: #1d2125;
     --button-hover: #85b8ff;
+
+    --input-bg: #22272b;
+    --input-bg-hover: #282e33;
+    --input-border: #738496;
+    --input-border-focus: #85b8ff;
   }
 }
 
@@ -34,10 +48,12 @@ select,
 textarea,
 button {
   font: inherit;
+  color: inherit;
+  box-sizing: border-box;
 }
 
 .g-button {
-  padding: 4px 20px;
+  padding: 3px 20px;
 
   border-radius: 4px;
 
@@ -53,4 +69,28 @@ button {
 .g-button:hover,
 .g-button:focus {
   background-color: var(--button-hover);
+}
+
+.g-button:focus {
+  outline: 2px solid var(--outline);
+  outline-offset: 2px;
+}
+
+.g-input {
+  padding: 4px 8px;
+
+  border: 1px solid var(--input-border);
+  border-radius: 4px;
+
+  background-color: var(--input-bg);
+}
+
+.g-input:hover {
+  background-color: var(--input-bg-hover);
+}
+
+.g-input:focus {
+  border-color: var(--input-border-focus);
+
+  outline: 2px solid var(--outline);
 }

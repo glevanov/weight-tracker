@@ -32,7 +32,7 @@
     <label class="label" for="weight-input">{$i18n("addWeight.header")}</label>
 
     <input
-      class="input"
+      class="g-input input"
       id="weight-input"
       bind:value
       inputmode="decimal"
