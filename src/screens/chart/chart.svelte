@@ -7,6 +7,7 @@
     PointElement,
     CategoryScale,
     Tooltip,
+    type ChartOptions,
   } from "chart.js";
 
   import type { Weight } from "../../api/types";
@@ -44,15 +45,44 @@
       {
         label: "Вес",
         data,
-        borderColor: "#303F9F",
-        backgroundColor: "#303F9F",
+        borderColor: "#2898BD",
+        backgroundColor: "#2898BD",
       },
     ],
+  };
+
+  const options: ChartOptions<"line"> = {
+    scales: {
+      x: {
+        ticks: {
+          font: {
+            size: 16,
+          },
+        },
+      },
+      y: {
+        ticks: {
+          font: {
+            size: 16,
+          },
+        },
+      },
+    },
+    plugins: {
+      tooltip: {
+        bodyFont: {
+          size: 16,
+        },
+        titleFont: {
+          size: 16,
+        },
+      },
+    },
   };
 </script>
 
 <div class="chart">
-  <Line data={chartData} />
+  <Line data={chartData} {options} />
 </div>
 
 <style>
