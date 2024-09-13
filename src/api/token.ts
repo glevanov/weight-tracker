@@ -9,6 +9,10 @@ export const readToken = () => {
   return typeof token === "string" ? token : null;
 };
 
+export const clearToken = () => {
+  localStorage.removeItem(TOKEN_KEY);
+};
+
 export const getAuthHeader = () => {
   const token = readToken();
   return `Bearer ${token}`;

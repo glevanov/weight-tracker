@@ -1,13 +1,11 @@
 <script lang="ts">
-  import LangSelect from "./lang-select.svelte";
+  import Header from "./header.svelte";
 
   export let column = false;
 </script>
 
 <div class={"page"}>
-  <div class="header">
-    <LangSelect />
-  </div>
+  <Header />
 
   <div class={`content ${column ? "column" : ""}`}>
     <slot />
@@ -19,12 +17,6 @@
     height: 100%;
     display: grid;
     grid-template-rows: auto 1fr;
-  }
-
-  .header {
-    display: flex;
-    justify-content: flex-end;
-    padding: 0.4em 1em;
   }
 
   .content {

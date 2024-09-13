@@ -1,7 +1,7 @@
 import { get } from "svelte/store";
 
 import type { Range } from "../screens/chart/types";
-import type { Response } from "./types";
+import type { Response, Token } from "./types";
 import { switchScreen } from "../store/screen";
 import { language } from "../store/language";
 
@@ -78,3 +78,23 @@ export const handleAuthError = (response: globalThis.Response) => {
 };
 
 export const getAcceptLanguage = () => get(language);
+
+export const isToken = (token: unknown): token is Token => {
+  if (typeof token !== "object" || token === null) {
+    return false;
+  }
+
+  if (!("username" in token) || typeof token.username !== "string") {
+    return false;
+  }
+
+  if (!("iat" in token) || typeof token.iat !== "number") {
+    return false;
+  }
+
+  if (!("exp" in token) || typeof token.exp !== "number") {
+    return false;
+  }
+
+  return true;
+};

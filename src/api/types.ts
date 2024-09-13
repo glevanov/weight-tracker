@@ -14,3 +14,9 @@ export type ErrorResponse = {
 };
 
 export type Response<Data> = SuccessResponse<Data> | ErrorResponse;
+
+export type Token = {
+  username: string;
+  iat: number;
+  exp: number;
+};

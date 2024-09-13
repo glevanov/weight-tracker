@@ -6,7 +6,7 @@ import {
   handleAuthError,
   mapRangeToDates,
 } from "./util";
-import { getAuthHeader, saveToken } from "./token";
+import { getAuthHeader } from "./token";
 
 const apiUrl = import.meta.env.VITE_API_URL;
 
@@ -58,13 +58,7 @@ export const login = async (
     credentials: "include",
   });
 
-  const result = await extractResult<string>(response);
-
-  if (result.isSuccess) {
-    saveToken(result.data);
-  }
-
-  return result;
+  return await extractResult<string>(response);
 };
 
 export const checkSession = async () => {

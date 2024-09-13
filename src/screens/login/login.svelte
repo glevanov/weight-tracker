@@ -4,6 +4,8 @@
   import { addToast } from "../../store/toast";
   import { switchScreen } from "../../store/screen";
   import { i18n } from "../../store/language";
+  import { saveToken } from "../../api/token";
+  import { updateUserFromToken } from "../../store/user";
 
   let username = "";
   let password = "";
@@ -27,6 +29,8 @@
     if (!result.isSuccess) {
       addToast(result.error, "error");
     } else {
+      saveToken(result.data);
+      updateUserFromToken(result.data);
       switchScreen("addWeight");
     }
   };
