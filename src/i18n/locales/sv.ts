@@ -7,6 +7,7 @@ export const sv: Locale = {
     password: "Lösenord",
     submit: "Skicka",
     emptyCredentials: "Användarnamn och lösenord får inte vara tomma",
+    logout: "Logga ut",
   },
   addWeight: {
     header: "Ange din vikt",

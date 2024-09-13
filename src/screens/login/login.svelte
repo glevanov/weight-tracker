@@ -39,10 +39,17 @@
 <Page>
   <form class="form" on:submit|preventDefault={onSubmit}>
     <label for="login">{$i18n("login.login")}</label>
-    <input type="text" name="login" id="login" bind:value={username} />
+    <input
+      class="g-input"
+      type="text"
+      name="login"
+      id="login"
+      bind:value={username}
+    />
 
     <label class="withGap" for="password">{$i18n("login.password")}</label>
     <input
+      class="g-input"
       type="password"
       name="password"
       id="password"

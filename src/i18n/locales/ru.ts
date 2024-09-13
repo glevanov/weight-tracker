@@ -5,6 +5,7 @@ export const ru = {
     password: "Пароль",
     submit: "Войти",
     emptyCredentials: "Имя пользователя и пароль не могут быть пустыми",
+    logout: "Выйти",
   },
   addWeight: {
     header: "Введите ваш вес",

@@ -30,3 +30,7 @@ export const user = writable<string | null>(getTokenOnLoad());
 export const updateUserFromToken = (token: string) => {
   user.set(readUserFromToken(token));
 };
+
+export const clearUser = () => {
+  user.set(null);
+};

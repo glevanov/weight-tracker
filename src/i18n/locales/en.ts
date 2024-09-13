@@ -7,6 +7,7 @@ export const en: Locale = {
     password: "Password",
     submit: "Submit",
     emptyCredentials: "Username and password cannot be empty",
+    logout: "Logout",
   },
   addWeight: {
     header: "Enter your weight",

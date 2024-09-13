@@ -7,6 +7,7 @@ export const zhTW: Locale = {
     password: "密碼",
     submit: "提交",
     emptyCredentials: "使用者名稱和密碼不能為空",
+    logout: "登出",
   },
   addWeight: {
     header: "輸入你的體重",

@@ -90,6 +90,15 @@ button {
   background-color: var(--button-bg-secondary-hover);
 }
 
+.g-button--icon {
+  padding: 0;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .g-input,
 .g-select {
   padding: 4px 8px;
