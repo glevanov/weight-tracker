@@ -12,10 +12,11 @@
   .toast {
     display: flex;
     align-items: center;
-    width: 100%;
+    width: calc(100vw - 40px);
     max-width: 400px;
     margin: 0 auto 16px auto;
     padding: 16px;
+    box-sizing: border-box;
 
     border-radius: 4px;
     box-shadow:
