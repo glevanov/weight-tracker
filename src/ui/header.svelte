@@ -18,9 +18,16 @@
 
 <style>
   .header {
+    --border: #091e4224;
+
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0.4em 1em;
+    padding: 8px 20px;
+    border-block-end: 1px solid var(--border);
+
+    @media (prefers-color-scheme: dark) {
+      --border: #a6c5e229;
+    }
   }
 </style>
