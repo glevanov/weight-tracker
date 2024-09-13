@@ -7,8 +7,9 @@
   --outline: #388bff;
 
   --button-bg: #0c66e4;
-  --button-color: #ffffff;
   --button-hover: #0055cc;
+  --button-bg-secondary: #091e420f;
+  --button-bg-secondary-hover: #091e4224;
 
   --input-bg: #ffffff;
   --input-bg-hover: #f7f8f9;
@@ -24,8 +25,9 @@
     --outline: #85b8ff;
 
     --button-bg: #579dff;
-    --button-color: #1d2125;
     --button-hover: #85b8ff;
+    --button-bg-secondary: #a1bdd914;
+    --button-bg-secondary-hover: #a6c5e229;
 
     --input-bg: #22272b;
     --input-bg-hover: #282e33;
@@ -57,25 +59,35 @@ button {
 .g-button {
   padding: 3px 20px;
 
+  border: none;
   border-radius: 4px;
 
-  color: var(--button-color);
-
-  border: none;
-
   cursor: pointer;
-
-  background-color: var(--button-bg);
 }
 
-.g-button:hover,
-.g-button:focus {
+.g-button--primary {
+  background-color: var(--button-bg);
+
+  color: var(--inverse-text-color);
+}
+
+.g-button--primary:hover,
+.g-button--primary:active {
   background-color: var(--button-hover);
 }
 
 .g-button:focus {
   outline: 2px solid var(--outline);
   outline-offset: 2px;
+}
+
+.g-button--default {
+  background-color: var(--button-bg-secondary);
+}
+
+.g-button--default:hover,
+.g-button--default:active {
+  background-color: var(--button-bg-secondary-hover);
 }
 
 .g-input,

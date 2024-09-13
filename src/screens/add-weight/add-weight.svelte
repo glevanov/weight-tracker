@@ -52,12 +52,12 @@
       bind:this={ref}
     />
 
-    <button class="g-button button submit" type="submit"
+    <button class="g-button g-button--primary button submit" type="submit"
       >{$i18n("addWeight.submit")}</button
     >
 
     <button
-      class="g-button button showGraph"
+      class="g-button g-button--default button showGraph"
       type="button"
       on:click={handleShowGraph}
     >
