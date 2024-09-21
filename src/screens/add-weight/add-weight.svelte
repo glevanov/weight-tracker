@@ -27,6 +27,7 @@
     if (!result.isSuccess) {
       addToast(result.error, "error");
     } else {
+      value = "";
       addToast($i18n("addWeight.success"), "success");
     }
   };
