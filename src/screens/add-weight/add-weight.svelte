@@ -8,10 +8,10 @@
   import { i18n } from "../../store/language";
 
   let value = "";
-  let isAdding = false;
+  let state: "idle" | "adding" | "success" = "idle";
 
   const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
-    if (isAdding) {
+    if (state !== "idle") {
       return;
     }
 
@@ -20,15 +20,15 @@
       return;
     }
 
-    isAdding = true;
+    state = "adding";
     const result = await addWeight(value);
-    isAdding = false;
 
     if (!result.isSuccess) {
       addToast(result.error, "error");
+      state = "idle";
     } else {
       value = "";
-      addToast($i18n("addWeight.success"), "success");
+      state = "success";
     }
   };
 
@@ -43,19 +43,25 @@
 
 <Page>
   <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
-    <label class="label" for="weight-input">{$i18n("addWeight.header")}</label>
+    {#if state === "success"}
+      <span>{$i18n("addWeight.success")}</span>
+    {:else}
+      <label class="label" for="weight-input">
+        {$i18n("addWeight.header")}
+      </label>
 
-    <input
-      class="g-input input"
-      id="weight-input"
-      bind:value
-      inputmode="decimal"
-      bind:this={ref}
-    />
+      <input
+        class="g-input input"
+        id="weight-input"
+        bind:value
+        inputmode="decimal"
+        bind:this={ref}
+      />
 
-    <button class="g-button g-button--primary button submit" type="submit"
-      >{$i18n("addWeight.submit")}</button
-    >
+      <button class="g-button g-button--primary button submit" type="submit">
+        {$i18n("addWeight.submit")}
+      </button>
+    {/if}
 
     <button
       class="g-button g-button--default button showGraph"
