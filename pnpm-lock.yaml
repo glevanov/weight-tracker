@@ -28,8 +28,8 @@ importers:
         specifier: 3.1.2
         version: 3.1.2(svelte@4.2.19)(vite@5.4.7)
       '@testing-library/svelte':
-        specifier: 5.2.1
-        version: 5.2.1(svelte@4.2.19)(vite@5.4.7)(vitest@2.1.1(happy-dom@15.7.4))
+        specifier: 5.2.4
+        version: 5.2.4(svelte@4.2.19)(vite@5.4.7)(vitest@2.1.1(happy-dom@15.7.4))
       '@typescript-eslint/eslint-plugin':
         specifier: 8.6.0
         version: 8.6.0(@typescript-eslint/parser@8.6.0(eslint@8.57.0)(typescript@5.6.2))(eslint@8.57.0)(typescript@5.6.2)
@@ -393,8 +393,8 @@ packages:
     resolution: {integrity: sha512-pemlzrSESWbdAloYml3bAJMEfNh1Z7EduzqPKprCH5S341frlpYnUEW0H72dLxa6IsYr+mPno20GiSm+h9dEdQ==}
     engines: {node: '>=18'}
 
-  '@testing-library/svelte@5.2.1':
-    resolution: {integrity: sha512-yXSqBsYaQAeP2xt7gqKu135Q67+NTsBDcpL1akv5MVAQ/amb7AQ0zW5nzrquTIE2lvrc6q58KZhQA61Vc05ZOg==}
+  '@testing-library/svelte@5.2.4':
+    resolution: {integrity: sha512-EFdy73+lULQgMJ1WolAymrxWWrPv9DWyDuDFKKlUip2PA/EXuHptzfYOKWljccFWDKhhGOu3dqNmoc2f/h/Ecg==}
     engines: {node: '>= 10'}
     peerDependencies:
       svelte: ^3 || ^4 || ^5 || ^5.0.0-next.0
@@ -737,6 +737,7 @@ packages:
   eslint@8.57.0:
     resolution: {integrity: sha512-dZ6+mexnaTIbSBZWgou51U6OmzIhYM2VcNdtiTtI7qPNZm35Akpr0f6vtw3w1Kmn5PYo+tZVfh13WrhpS6oLqQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    deprecated: This version is no longer supported. Please see https://eslint.org/version-support for other options.
     hasBin: true
 
   espree@9.6.1:
@@ -1480,7 +1481,7 @@ snapshots:
   '@babel/code-frame@7.24.7':
     dependencies:
       '@babel/highlight': 7.24.7
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/helper-validator-identifier@7.24.7': {}
 
@@ -1489,7 +1490,7 @@ snapshots:
       '@babel/helper-validator-identifier': 7.24.7
       chalk: 2.4.2
       js-tokens: 4.0.0
-      picocolors: 1.0.1
+      picocolors: 1.1.0
 
   '@babel/runtime@7.25.0':
     dependencies:
@@ -1712,7 +1713,7 @@ snapshots:
       lz-string: 1.5.0
       pretty-format: 27.5.1
 
-  '@testing-library/svelte@5.2.1(svelte@4.2.19)(vite@5.4.7)(vitest@2.1.1(happy-dom@15.7.4))':
+  '@testing-library/svelte@5.2.4(svelte@4.2.19)(vite@5.4.7)(vitest@2.1.1(happy-dom@15.7.4))':
     dependencies:
       '@testing-library/dom': 10.4.0
       svelte: 4.2.19
