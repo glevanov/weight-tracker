@@ -1,12 +1,11 @@
-name: deploy
-
+name: pr.yml
 on:
-  push:
+  pull_request:
     branches:
       - "master"
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -15,7 +14,3 @@ jobs:
         uses: ./.github/actions/setup
       - name: Lint
         uses: ./.github/actions/lint
-      - name: Deploy
-        uses: ./.github/actions/deploy
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
