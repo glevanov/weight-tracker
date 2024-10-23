@@ -1,9 +1,14 @@
 <script lang="ts">
-  export let column = false;
+  interface Props {
+    column?: boolean;
+    children?: import("svelte").Snippet;
+  }
+
+  let { column = false, children }: Props = $props();
 </script>
 
 <div class={`content ${column ? "column" : ""}`}>
-  <slot />
+  {@render children?.()}
 </div>
 
 <style>

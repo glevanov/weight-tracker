@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { FormEventHandler } from "svelte/elements";
   import Page from "../../ui/page.svelte";
   import { login } from "../../api/api";
   import { addToast } from "../../store/toast";
@@ -7,11 +8,12 @@
   import { saveToken } from "../../api/token";
   import { updateUserFromToken } from "../../store/user";
 
-  let username = "";
-  let password = "";
+  let username = $state("");
+  let password = $state("");
   let isLoading = false;
 
-  const onSubmit = async () => {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (evt) => {
+    evt.preventDefault();
     if (isLoading) {
       return;
     }
@@ -37,7 +39,7 @@
 </script>
 
 <Page>
-  <form class="form" on:submit|preventDefault={onSubmit}>
+  <form class="form" onsubmit={onSubmit}>
     <label for="login">{$i18n("login.login")}</label>
     <input
       class="g-input"

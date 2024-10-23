@@ -1,11 +1,12 @@
 <script lang="ts">
+  import { get } from "svelte/store";
   import LangSelect from "./lang-select.svelte";
   import { clearUser, user as userStore } from "../store/user";
   import { i18n } from "../store/language";
   import { clearToken } from "../api/token";
   import { switchScreen } from "../store/screen";
 
-  let user: string | null;
+  let user: string | null = $state(get(userStore));
   userStore.subscribe((value) => (user = value));
 
   const logout = () => {
@@ -23,7 +24,7 @@
         class="g-button g-button--default g-button--icon logout"
         type="button"
         aria-label={$i18n("login.logout")}
-        on:click={logout}
+        onclick={logout}
       >
         <svg width="24" height="24" viewBox="0 0 24 24" role="presentation">
           <g fill="currentcolor" fill-rule="evenodd">

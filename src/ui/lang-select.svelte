@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { get } from "svelte/store";
   import { i18n, type Lang } from "../i18n/i18n";
   import type { ChangeEventHandler } from "svelte/elements";
   import { language, switchLanguage } from "../store/language";
@@ -14,11 +15,11 @@
     switchLanguage(value);
   };
 
-  let lang: Lang;
+  let lang: Lang = $state(get(language));
   language.subscribe((value) => (lang = value));
 </script>
 
-<select class="g-select" bind:value={lang} on:change={handleSelect}>
+<select class="g-select" bind:value={lang} onchange={handleSelect}>
   {#each selectOptions as option}
     <option value={option.value}>{option.name}</option>
   {/each}

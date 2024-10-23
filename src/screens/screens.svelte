@@ -1,4 +1,5 @@
 <script lang="ts">
+  import { get } from "svelte/store";
   import { currentScreen, type Screen } from "../store/screen";
   import InitialLoad from "./initial-load/initial-load.svelte";
   import AddWeight from "./add-weight/add-weight.svelte";
@@ -6,7 +7,7 @@
   import Visualization from "./chart/visualization.svelte";
   import Error from "./error/error.svelte";
 
-  let screen: Screen;
+  let screen: Screen = $state(get(currentScreen));
   currentScreen.subscribe((value) => (screen = value));
 </script>
 

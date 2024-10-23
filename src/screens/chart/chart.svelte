@@ -1,7 +1,7 @@
 <script lang="ts">
-  import { Line } from "svelte-chartjs";
   import {
     Chart as ChartJS,
+    LineController,
     LineElement,
     LinearScale,
     PointElement,
@@ -9,37 +9,43 @@
     Tooltip,
     type ChartOptions,
   } from "chart.js";
+  import { get } from "svelte/store";
 
   import type { Weight } from "../../api/types";
   import type { Lang } from "../../i18n/i18n";
   import { language } from "../../store/language";
   import { langToLocaleString } from "../../i18n/util";
 
-  export let weights: Weight[] = [];
+  interface Props {
+    weights?: Weight[];
+  }
+
+  let { weights = [] }: Props = $props();
 
   ChartJS.register(
     LineElement,
+    LineController,
     LinearScale,
     PointElement,
     CategoryScale,
     Tooltip,
   );
 
-  let lang: Lang;
+  let lang: Lang = $state(get(language));
   language.subscribe((value) => (lang = value));
 
-  let data: number[];
-  $: data = weights.map((entry) => entry.weight);
+  let data: number[] = $derived(weights.map((entry) => entry.weight));
 
-  let labels: string[];
-  $: labels = weights.map((entry) =>
-    new Date(entry.timestamp).toLocaleDateString(langToLocaleString[lang], {
-      month: "short",
-      day: "numeric",
-    }),
+  let labels: string[] = $derived(
+    weights.map((entry) =>
+      new Date(entry.timestamp).toLocaleDateString(langToLocaleString[lang], {
+        month: "short",
+        day: "numeric",
+      }),
+    ),
   );
 
-  $: chartData = {
+  let chartData = $derived({
     labels,
     datasets: [
       {
@@ -49,7 +55,7 @@
         backgroundColor: "#2898BD",
       },
     ],
-  };
+  });
 
   const options: ChartOptions<"line"> = {
     scales: {
@@ -79,10 +85,22 @@
       },
     },
   };
+
+  let ref: HTMLCanvasElement | undefined = $state();
+
+  $effect(() => {
+    if (ref) {
+      new ChartJS(ref, {
+        type: "line",
+        data: chartData,
+        options,
+      });
+    }
+  });
 </script>
 
 <div class="chart">
-  <Line data={chartData} {options} />
+  <canvas id="weights" bind:this={ref}></canvas>
 </div>
 
 <style>

@@ -7,11 +7,12 @@
   import Page from "../../ui/page.svelte";
   import { i18n } from "../../store/language";
 
-  let value = "";
-  let state: "idle" | "adding" | "success" = "idle";
+  let value = $state("");
+  let status: "idle" | "adding" | "success" = $state("idle");
 
-  const onSubmit: FormEventHandler<HTMLFormElement> = async () => {
-    if (state !== "idle") {
+  const onSubmit: FormEventHandler<HTMLFormElement> = async (evt) => {
+    evt.preventDefault();
+    if (status !== "idle") {
       return;
     }
 
@@ -20,21 +21,21 @@
       return;
     }
 
-    state = "adding";
+    status = "adding";
     const result = await addWeight(value);
 
     if (!result.isSuccess) {
       addToast(result.error, "error");
-      state = "idle";
+      status = "idle";
     } else {
       value = "";
-      state = "success";
+      status = "success";
     }
   };
 
   const handleShowGraph = () => switchScreen("chart");
 
-  let ref: HTMLInputElement;
+  let ref: HTMLInputElement | undefined = $state();
 
   onMount(() => {
     ref?.focus();
@@ -42,8 +43,8 @@
 </script>
 
 <Page>
-  <form class="form" on:submit|preventDefault={onSubmit} autocomplete="off">
-    {#if state === "success"}
+  <form class="form" onsubmit={onSubmit} autocomplete="off">
+    {#if status === "success"}
       <span>{$i18n("addWeight.success")}</span>
     {:else}
       <label class="label" for="weight-input">
@@ -66,7 +67,7 @@
     <button
       class="g-button g-button--default button showGraph"
       type="button"
-      on:click={handleShowGraph}
+      onclick={handleShowGraph}
     >
       {$i18n("addWeight.showGraph")}
     </button>

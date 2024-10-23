@@ -10,15 +10,14 @@
 
   const handleShowAddWeight = () => switchScreen("addWeight");
 
-  let selectedRange: Range = readRange() ?? "14-days";
+  let selectedRange: Range = $state(readRange() ?? "14-days");
 
   const onSelectRange = (value: Range) => {
     selectedRange = value;
     storeRange(value);
-    weightsRequest = getWeights(selectedRange);
   };
 
-  let weightsRequest = getWeights(selectedRange);
+  let weightsRequest = $derived(getWeights(selectedRange));
 </script>
 
 <Page column={true}>

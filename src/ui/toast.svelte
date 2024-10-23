@@ -1,11 +1,16 @@
 <script lang="ts">
   import { fade } from "svelte/transition";
 
-  export let type: "error" | "success" = "error";
+  interface Props {
+    type?: "error" | "success";
+    children?: import("svelte").Snippet;
+  }
+
+  let { type = "error", children }: Props = $props();
 </script>
 
 <div class="toast {type}" transition:fade>
-  <slot></slot>
+  {@render children?.()}
 </div>
 
 <style>
