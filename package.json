@@ -57,7 +57,7 @@
   "dependencies": {
     "chart.js": "4.4.9",
     "jwt-decode": "4.0.0",
-    "nanoid": "5.0.8",
+    "nanoid": "5.1.5",
     "svelte": "5.30.2"
   }
 }
