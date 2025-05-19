@@ -5,9 +5,12 @@
   import { switchScreen } from "../../store/screen";
   import cats from "./cats.webp";
   import { i18n } from "../../store/language";
+  import { acquireWakeLock, releaseWakeLock } from "./wake-lock";
 
   onMount(async () => {
+    await acquireWakeLock();
     const healthCheckResult = await checkHealth();
+    await releaseWakeLock();
     if (!healthCheckResult.isSuccess) {
       switchScreen("error");
       return;
