@@ -5,15 +5,14 @@
     "dev": "VITE_API_URL=http://localhost:3000 pnpm vite",
     "build": "pnpm vite build",
     "build:gh-pages": "pnpm vite build --base /weight-tracker/",
-    "lint": "pnpm run lint:prettier && pnpm run lint:eslint && pnpm run lint:tsc",
-    "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:eslint && pnpm run lint:tsc",
+    "lint": "pnpm run lint:prettier && pnpm run lint:oxlint && pnpm run lint:tsc",
+    "lint:ci": "pnpm run lint:prettier-check && pnpm run lint:oxlint && pnpm run lint:tsc",
     "lint:prettier": "prettier --write src",
     "lint:prettier-check": "prettier --check src",
-    "lint:eslint": "eslint src",
+    "lint:oxlint": "oxlint src --deny-warnings",
     "lint:tsc": "tsc --noEmit",
     "lint:setup-hooks": "simple-git-hooks",
-    "test": "vitest --run",
-    "postinstall": "pnpm exec simple-git-hooks"
+    "test": "vitest --run"
   },
   "author": "Grigoriy Levanov",
   "repository": {
@@ -28,7 +27,7 @@
   "lint-staged": {
     "*.{js,ts,svelte}": [
       "prettier --write",
-      "eslint --fix"
+      "oxlint --fix --deny-warnings"
     ],
     "*.css": [
       "prettier --write"
@@ -38,26 +37,25 @@
     ]
   },
   "devDependencies": {
-    "@sveltejs/vite-plugin-svelte": "4.0.1",
-    "@testing-library/svelte": "5.2.4",
-    "@typescript-eslint/eslint-plugin": "8.14.0",
-    "@typescript-eslint/parser": "8.14.0",
-    "eslint": "8.57.1",
-    "eslint-config-prettier": "9.1.0",
-    "eslint-plugin-svelte": "2.46.0",
-    "happy-dom": "15.11.6",
-    "lint-staged": "15.2.10",
-    "prettier": "3.3.3",
-    "prettier-plugin-svelte": "3.2.8",
-    "simple-git-hooks": "2.11.1",
-    "typescript": "5.6.3",
-    "vite": "5.4.11",
-    "vitest": "2.1.5"
+    "@sveltejs/vite-plugin-svelte": "5.0.3",
+    "@testing-library/svelte": "5.2.7",
+    "@typescript-eslint/eslint-plugin": "8.32.1",
+    "@typescript-eslint/parser": "8.32.1",
+    "happy-dom": "17.4.7",
+    "lint-staged": "16.0.0",
+    "oxlint": "0.16.11",
+    "prettier": "3.5.3",
+    "prettier-plugin-svelte": "3.4.0",
+    "simple-git-hooks": "2.13.0",
+    "typescript": "5.8.3",
+    "vite": "6.3.5",
+    "vitest": "3.1.3"
   },
   "dependencies": {
     "chart.js": "4.4.9",
     "jwt-decode": "4.0.0",
-    "nanoid": "5.0.8",
+    "nanoid": "5.1.5",
     "svelte": "5.30.2"
-  }
+  },
+  "packageManager": "pnpm@10.10.0+sha512.d615db246fe70f25dcfea6d8d73dee782ce23e2245e3c4f6f888249fb568149318637dca73c2c5c8ef2a4ca0d5657fb9567188bfab47f566d1ee6ce987815c39"
 }
