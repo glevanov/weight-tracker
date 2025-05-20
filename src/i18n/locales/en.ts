@@ -28,6 +28,7 @@ export const en: Locale = {
   },
   initialLoading: {
     loading: "Warming up the server! This may take a few minutes.",
+    wakeLock: "Acquire wake lock",
     failed:
       "Failed to warm up the server. Try refreshing the page or come back later.",
   },

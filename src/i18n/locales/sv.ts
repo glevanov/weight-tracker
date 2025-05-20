@@ -28,6 +28,7 @@ export const sv: Locale = {
   },
   initialLoading: {
     loading: "Startar servern! Detta kan ta några minuter.",
+    wakeLock: "Förhindra skärmlåsning",
     failed:
       "Misslyckades med att starta servern. Försök att uppdatera sidan eller kom tillbaka senare.",
   },

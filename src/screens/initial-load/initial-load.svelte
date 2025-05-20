@@ -8,7 +8,6 @@
   import { acquireWakeLock, releaseWakeLock } from "./wake-lock";
 
   onMount(async () => {
-    await acquireWakeLock();
     const healthCheckResult = await checkHealth();
     await releaseWakeLock();
     if (!healthCheckResult.isSuccess) {
@@ -27,7 +26,13 @@
 </script>
 
 <Page column={true}>
-  <img class="cats" src={cats} alt="" />
+  <button
+    class="invisible-button"
+    onclick={acquireWakeLock}
+    aria-label={$i18n("initialLoading.wakeLock")}
+  >
+    <img class="cats" src={cats} alt="" />
+  </button>
   <span class="text">{$i18n("initialLoading.loading")}</span>
 </Page>
 
@@ -52,5 +57,12 @@
     100% {
       transform: rotate(360deg);
     }
+  }
+
+  .invisible-button {
+    border: none;
+    background: none;
+    outline: none;
+    padding: 0;
   }
 </style>
