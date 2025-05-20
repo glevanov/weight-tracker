@@ -11,10 +11,6 @@ export const readLanguageFromNavigator = (): Lang | null => {
     return "sv";
   }
 
-  /*if (navigatorLang === "zh-tw") {
-    return "zh-tw";
-  }*/
-
   if (navigatorLang === "ru") {
     return "ru";
   }
