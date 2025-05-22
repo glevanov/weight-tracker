@@ -6,4 +6,5 @@ UI for tracking weight.
 Deployed at [https://glevanov.github.io/weight-tracker/](https://glevanov.github.io/weight-tracker/).
 
 ## App demo
-![App demo](./media/demo.mp4)
+https://github.com/user-attachments/assets/93f8ff24-d9c4-456a-ae0d-7f525da89009
+
