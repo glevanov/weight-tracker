@@ -43,7 +43,7 @@
     "@typescript-eslint/parser": "8.32.1",
     "happy-dom": "17.4.7",
     "lint-staged": "16.0.0",
-    "oxlint": "0.16.11",
+    "oxlint": "0.18.1",
     "prettier": "3.5.3",
     "prettier-plugin-svelte": "3.4.0",
     "simple-git-hooks": "2.13.0",
