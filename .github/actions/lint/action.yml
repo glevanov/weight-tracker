@@ -1,9 +1,0 @@
-name: Lint
-description: Lints project
-
-runs:
-  using: "composite"
-  steps:
-    - name: Lint
-      run: pnpm --dir apps/frontend run lint:ci
-      shell: bash
