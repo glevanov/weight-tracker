@@ -1,6 +1,14 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
+  "automerge": false,
+  "internalChecksFilter": "strict",
+  "minimumReleaseAge": "2 weeks",
+  "packageRules": [
+    {
+      "matchManagers": ["github-actions"],
+      "groupName": "All GitHub Actions",
+      "groupSlug": "all-gha"
+    }
   ]
 }
