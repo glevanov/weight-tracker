@@ -42,7 +42,7 @@
     "@typescript-eslint/eslint-plugin": "8.32.1",
     "@typescript-eslint/parser": "8.32.1",
     "happy-dom": "17.4.7",
-    "oxlint": "0.16.11",
+    "oxlint": "1.50.0",
     "prettier": "3.8.1",
     "prettier-plugin-svelte": "3.5.0",
     "typescript": "5.8.3",
