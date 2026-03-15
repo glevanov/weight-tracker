@@ -14,5 +14,5 @@ runs:
         version: latest
         run_install: false
     - name: Install
-      run: pnpm install
+      run: pnpm --dir apps/frontend install
       shell: bash

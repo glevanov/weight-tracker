@@ -22,7 +22,7 @@
   "type": "module",
   "license": "MIT",
   "simple-git-hooks": {
-    "pre-commit": "pnpm exec lint-staged && pnpm run lint:tsc"
+    "pre-commit": "pnpm --dir apps/frontend exec lint-staged && pnpm --dir apps/frontend run lint:tsc"
   },
   "lint-staged": {
     "*.{js,ts,svelte}": [
@@ -46,7 +46,6 @@
     "oxlint": "0.16.11",
     "prettier": "3.5.3",
     "prettier-plugin-svelte": "3.4.0",
-    "simple-git-hooks": "2.13.0",
     "typescript": "5.8.3",
     "vite": "6.3.5",
     "vitest": "3.1.3"
