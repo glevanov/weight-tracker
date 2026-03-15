@@ -3,8 +3,14 @@ name: Fronteend CI
 on:
   push:
     branches: [master]
+    paths:
+      - "apps/frontend/**"
+      - ".github/workflows/frontend-ci.yml"
   pull_request:
     branches: [master]
+    paths:
+      - "apps/frontend/**"
+      - ".github/workflows/frontend-ci.yml"
 
 jobs:
   test:
