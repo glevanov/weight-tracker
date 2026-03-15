@@ -1,4 +1,4 @@
-.PHONY: build run clean fmt test-unit test-integration tidy download docker-build
+.PHONY: build run clean fmt lint test-unit test-integration tidy download docker-build
 
 BINARY_NAME := build/server
 CMD_DIR := ./cmd/server
@@ -17,6 +17,10 @@ clean:
 
 fmt:
 	go fmt ./...	
+
+lint:
+	gofmt -w .
+	go vet ./...
 	
 test-unit:
 	go test -v ./internal/...
