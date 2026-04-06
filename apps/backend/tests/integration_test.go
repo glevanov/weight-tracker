@@ -9,11 +9,9 @@ import (
 	"testing"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgxpool"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
-	"go.mongodb.org/mongo-driver/v2/bson"
-	"go.mongodb.org/mongo-driver/v2/mongo"
-	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 type AddWeightRequest struct {
@@ -40,24 +38,46 @@ type ErrorResponse struct {
 	Error     string `json:"error,omitempty"`
 }
 
-// createTestUser creates a test user directly in MongoDB
+// createTestUser creates a test user directly in Postgres
 // Password: "testpassword", Salt: "0102030405060708090a0b0c0d0e0f10"
-func createTestUser(mongoURI, dbName string) error {
+func createTestUser(databaseURL string) error {
 	ctx := context.Background()
-	client, err := mongo.Connect(options.Client().ApplyURI(mongoURI))
+	pool, err := pgxpool.New(ctx, databaseURL)
 	if err != nil {
 		return err
 	}
-	defer client.Disconnect(ctx)
+	defer pool.Close()
 
-	collection := client.Database(dbName).Collection("users")
+	_, err = pool.Exec(ctx, `
+		CREATE TABLE IF NOT EXISTS users (
+			username TEXT PRIMARY KEY,
+			password TEXT NOT NULL,
+			salt TEXT NOT NULL
+		)
+	`)
+	if err != nil {
+		return err
+	}
+
+	_, err = pool.Exec(ctx, `
+		CREATE TABLE IF NOT EXISTS weights (
+			id BIGSERIAL PRIMARY KEY,
+			username TEXT NOT NULL,
+			weight DOUBLE PRECISION NOT NULL,
+			timestamp TIMESTAMPTZ NOT NULL DEFAULT NOW()
+		)
+	`)
+	if err != nil {
+		return err
+	}
 
 	// Hash generated using scrypt with N=16384, r=8, p=1, keyLen=64
-	_, err = collection.InsertOne(ctx, bson.M{
-		"username": "testuser",
-		"password": "404ba06bdb03dc9a8a9ad7ea8e1f13a58d0c4a2a600580bf9ac558147c20afd960e7300e8ce8d0874dbd6be8cf4147caf07182787e468001f06d17df9b7e42b5",
-		"salt":     "0102030405060708090a0b0c0d0e0f10",
-	})
+	_, err = pool.Exec(ctx,
+		"INSERT INTO users (username, password, salt) VALUES ($1, $2, $3)",
+		"testuser",
+		"404ba06bdb03dc9a8a9ad7ea8e1f13a58d0c4a2a600580bf9ac558147c20afd960e7300e8ce8d0874dbd6be8cf4147caf07182787e468001f06d17df9b7e42b5",
+		"0102030405060708090a0b0c0d0e0f10",
+	)
 
 	return err
 }
@@ -93,10 +113,10 @@ func login(baseURL, username, password string) (string, error) {
 }
 
 func TestIntegration(t *testing.T) {
-	baseURL, mongoURI, cleanup := SetupTestEnvironment(t)
+	baseURL, databaseURL, cleanup := SetupTestEnvironment(t)
 	defer cleanup()
 
-	err := createTestUser(mongoURI, TestDBName)
+	err := createTestUser(databaseURL)
 	require.NoError(t, err)
 
 	var token string

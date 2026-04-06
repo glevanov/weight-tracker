@@ -13,4 +13,4 @@ restart:
 	$(COMPOSE) up -d
 
 logs:
-	$(COMPOSE) logs -f mongodb
+	$(COMPOSE) logs -f postgres

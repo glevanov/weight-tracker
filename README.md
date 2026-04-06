@@ -10,5 +10,3 @@ https://github.com/user-attachments/assets/93f8ff24-d9c4-456a-ae0d-7f525da89009
 
 - `apps/frontend` - Svelte frontend
 - `apps/backend` - Go backend service
-
-TODO: add database setup instructions

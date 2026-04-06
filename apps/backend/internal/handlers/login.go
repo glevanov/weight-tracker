@@ -2,11 +2,12 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"net/http"
 	"time"
 
 	"github.com/golang-jwt/jwt/v5"
-	"go.mongodb.org/mongo-driver/v2/bson"
+	"github.com/jackc/pgx/v5"
 	"weight-tracker-service/internal/auth"
 	"weight-tracker-service/internal/config"
 	"weight-tracker-service/internal/database"
@@ -21,9 +22,9 @@ type LoginRequest struct {
 }
 
 type UserDocument struct {
-	Username string `bson:"username"`
-	Password string `bson:"password"`
-	Salt     string `bson:"salt"`
+	Username string
+	Password string
+	Salt     string
 }
 
 func Login(cfg *config.Config) http.HandlerFunc {
@@ -45,10 +46,19 @@ func Login(cfg *config.Config) http.HandlerFunc {
 
 		logger.Info("login attempt", "username", req.Username)
 
-		collection := database.GetUsersCollection()
+		pool := database.GetPool()
 		var user UserDocument
-		err := collection.FindOne(r.Context(), bson.M{"username": req.Username}).Decode(&user)
+		err := pool.QueryRow(
+			r.Context(),
+			"SELECT username, password, salt FROM users WHERE username = $1 LIMIT 1",
+			req.Username,
+		).Scan(&user.Username, &user.Password, &user.Salt)
 		if err != nil {
+			if !errors.Is(err, pgx.ErrNoRows) {
+				logger.Error("login failed: database query error", "username", req.Username, "error", err)
+				writeError(w, http.StatusInternalServerError, i18n.Translate(lang, validation.ErrUnknown))
+				return
+			}
 			logger.Warn("login failed: user not found", "username", req.Username)
 			writeError(w, http.StatusUnauthorized, i18n.Translate(lang, validation.ErrUserUnauthorized))
 			return

@@ -4,62 +4,43 @@ import (
 	"context"
 	"time"
 
+	"github.com/jackc/pgx/v5/pgxpool"
 	"weight-tracker-service/internal/logger"
-
-	"go.mongodb.org/mongo-driver/v2/mongo"
-	"go.mongodb.org/mongo-driver/v2/mongo/options"
 )
 
 var (
-	client *mongo.Client
-	db     *mongo.Database
+	pool *pgxpool.Pool
 )
 
-const (
-	WeightsCollection = "weight"
-	UsersCollection   = "users"
-)
-
-func Connect(uri, dbName string) error {
+func Connect(uri string) error {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	clientOpts := options.Client().ApplyURI(uri)
-	c, err := mongo.Connect(clientOpts)
+	p, err := pgxpool.New(ctx, uri)
 	if err != nil {
 		logger.Error("database connection failed", "error", err)
 		return err
 	}
 
-	if err := c.Ping(ctx, nil); err != nil {
+	if err := p.Ping(ctx); err != nil {
+		p.Close()
 		logger.Error("database ping failed", "error", err)
 		return err
 	}
 
-	client = c
-	db = c.Database(dbName)
+	pool = p
 
-	logger.Info("database connected", "database", dbName)
+	logger.Info("database connected")
 	return nil
 }
 
-func Disconnect(ctx context.Context) error {
-	if client != nil {
-		err := client.Disconnect(ctx)
-		if err != nil {
-			logger.Error("database disconnect failed", "error", err)
-			return err
-		}
+func Disconnect() {
+	if pool != nil {
+		pool.Close()
 		logger.Info("database disconnected")
-		return nil
 	}
-	return nil
 }
 
-func GetWeightsCollection() *mongo.Collection {
-	return db.Collection(WeightsCollection)
-}
-
-func GetUsersCollection() *mongo.Collection {
-	return db.Collection(UsersCollection)
+func GetPool() *pgxpool.Pool {
+	return pool
 }

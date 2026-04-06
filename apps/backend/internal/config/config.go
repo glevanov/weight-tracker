@@ -10,8 +10,7 @@ import (
 type Config struct {
 	Port            int
 	FrontendURL     string
-	ConnectionURI   string
-	DBName          string
+	DatabaseURL     string
 	JWTSecret       string
 	SessionDuration time.Duration
 }
@@ -29,14 +28,12 @@ func Load() *Config {
 		frontendURL = "http://localhost:5173"
 	}
 
-	connectionURI := os.Getenv("CONNECTION_URI")
-	if connectionURI == "" {
-		panic(fmt.Errorf("CONNECTION_URI environment variable is required"))
+	databaseURL := os.Getenv("DATABASE_URL")
+	if databaseURL == "" {
+		databaseURL = os.Getenv("CONNECTION_URI")
 	}
-
-	dbName := os.Getenv("DB_NAME")
-	if dbName == "" {
-		dbName = "weight-tracker"
+	if databaseURL == "" {
+		panic(fmt.Errorf("DATABASE_URL environment variable is required"))
 	}
 
 	jwtSecret := os.Getenv("JWT_SECRET")
@@ -50,8 +47,7 @@ func Load() *Config {
 	return &Config{
 		Port:            port,
 		FrontendURL:     frontendURL,
-		ConnectionURI:   connectionURI,
-		DBName:          dbName,
+		DatabaseURL:     databaseURL,
 		JWTSecret:       jwtSecret,
 		SessionDuration: sessionDuration,
 	}

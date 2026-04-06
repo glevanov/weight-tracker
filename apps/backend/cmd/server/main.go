@@ -1,7 +1,6 @@
 package main
 
 import (
-	"context"
 	"fmt"
 	"net/http"
 
@@ -17,11 +16,11 @@ import (
 func main() {
 	cfg := config.Load()
 
-	if err := database.Connect(cfg.ConnectionURI, cfg.DBName); err != nil {
+	if err := database.Connect(cfg.DatabaseURL); err != nil {
 		logger.Error("database connection error", "error", err)
 		return
 	}
-	defer database.Disconnect(context.Background())
+	defer database.Disconnect()
 
 	r := chi.NewRouter()
 
