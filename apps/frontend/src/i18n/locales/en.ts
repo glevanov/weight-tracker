@@ -17,6 +17,7 @@ export const en: Locale = {
     empty: "Weight cannot be empty",
   },
   chart: {
+    weight: "Weight",
     twoWeeks: "Two weeks",
     month: "Month",
     quarter: "Quarter",

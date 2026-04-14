@@ -17,6 +17,7 @@ export const sv: Locale = {
     empty: "Vikt kan inte vara tom",
   },
   chart: {
+    weight: "Vikt",
     twoWeeks: "Två veckor",
     month: "Månad",
     quarter: "Kvartal",

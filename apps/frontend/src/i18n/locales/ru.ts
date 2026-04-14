@@ -15,6 +15,7 @@ export const ru = {
     empty: "Вес не может быть пустым",
   },
   chart: {
+    weight: "Вес",
     twoWeeks: "Две недели",
     month: "Месяц",
     quarter: "Квартал",

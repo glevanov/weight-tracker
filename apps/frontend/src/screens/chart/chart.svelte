@@ -13,7 +13,7 @@
 
   import type { Weight } from "../../api/types";
   import type { Lang } from "../../i18n/i18n";
-  import { language } from "../../store/language";
+  import { language, i18n } from "../../store/language";
   import { langToLocaleString } from "../../i18n/util";
 
   interface Props {
@@ -49,7 +49,7 @@
     labels,
     datasets: [
       {
-        label: "Вес",
+        label: $i18n("chart.weight"),
         data,
         borderColor: "#2898BD",
         backgroundColor: "#2898BD",
