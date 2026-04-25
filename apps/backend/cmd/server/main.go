@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strings"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/go-chi/cors"
@@ -11,6 +12,7 @@ import (
 	"weight-tracker-service/internal/database"
 	"weight-tracker-service/internal/handlers"
 	"weight-tracker-service/internal/logger"
+	"weight-tracker-service/internal/static"
 )
 
 func main() {
@@ -43,6 +45,17 @@ func main() {
 			r.Get("/session-check", handlers.SessionCheck)
 		})
 	})
+
+	if staticHandler, ok := static.Handler(); ok {
+		r.NotFound(func(w http.ResponseWriter, req *http.Request) {
+			if strings.HasPrefix(req.URL.Path, "/api/") {
+				http.NotFound(w, req)
+				return
+			}
+
+			staticHandler.ServeHTTP(w, req)
+		})
+	}
 
 	addr := fmt.Sprintf(":%d", cfg.Port)
 	logger.Info("server starting", "port", cfg.Port)

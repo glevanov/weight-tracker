@@ -2,5 +2,8 @@ apps/frontend/node_modules
 apps/frontend/dist
 apps/frontend/.cache
 apps/backend/build
+apps/backend/internal/static/dist/*
+!apps/backend/internal/static/dist/.keep
 apps/database/backups
+build/
 .env
