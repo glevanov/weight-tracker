@@ -90,7 +90,7 @@ func login(baseURL, username, password string) (string, error) {
 	}
 
 	resp, err := http.Post(
-		baseURL+"/login",
+		baseURL+"/api/login",
 		"application/json",
 		bytes.NewBuffer(jsonBody),
 	)
@@ -126,7 +126,7 @@ func TestIntegration(t *testing.T) {
 		var resp *http.Response
 		var err error
 		for range 10 {
-			resp, err = http.Get(baseURL + "/health-check")
+			resp, err = http.Get(baseURL + "/api/health-check")
 			if err == nil {
 				break
 			}
@@ -158,7 +158,7 @@ func TestIntegration(t *testing.T) {
 	})
 
 	t.Run("SessionCheck", func(t *testing.T) {
-		req, err := http.NewRequest("GET", baseURL+"/session-check", nil)
+		req, err := http.NewRequest("GET", baseURL+"/api/session-check", nil)
 		require.NoError(t, err)
 		req.Header.Set("Authorization", "Bearer "+token)
 
@@ -185,7 +185,7 @@ func TestIntegration(t *testing.T) {
 		require.NoError(t, err)
 
 		resp, err := http.Post(
-			baseURL+"/weights",
+			baseURL+"/api/weights",
 			"application/json",
 			bytes.NewBuffer(jsonBody),
 		)
@@ -200,7 +200,7 @@ func TestIntegration(t *testing.T) {
 		jsonBody, err := json.Marshal(reqBody)
 		require.NoError(t, err)
 
-		req, err := http.NewRequest("POST", baseURL+"/weights", bytes.NewBuffer(jsonBody))
+		req, err := http.NewRequest("POST", baseURL+"/api/weights", bytes.NewBuffer(jsonBody))
 		require.NoError(t, err)
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+token)
@@ -231,7 +231,7 @@ func TestIntegration(t *testing.T) {
 		jsonBody, err := json.Marshal(reqBody)
 		require.NoError(t, err)
 
-		req, err := http.NewRequest("POST", baseURL+"/weights", bytes.NewBuffer(jsonBody))
+		req, err := http.NewRequest("POST", baseURL+"/api/weights", bytes.NewBuffer(jsonBody))
 		require.NoError(t, err)
 		req.Header.Set("Content-Type", "application/json")
 		req.Header.Set("Authorization", "Bearer "+token)
@@ -255,7 +255,7 @@ func TestIntegration(t *testing.T) {
 	})
 
 	t.Run("GetWeights", func(t *testing.T) {
-		req, err := http.NewRequest("GET", baseURL+"/weights", nil)
+		req, err := http.NewRequest("GET", baseURL+"/api/weights", nil)
 		require.NoError(t, err)
 		req.Header.Set("Authorization", "Bearer "+token)
 

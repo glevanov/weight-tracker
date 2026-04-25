@@ -2,6 +2,7 @@ package config
 
 import (
 	"fmt"
+	"net/url"
 	"os"
 	"strconv"
 	"time"
@@ -17,28 +18,29 @@ type Config struct {
 
 func Load() *Config {
 	port := 3000
-	if p := os.Getenv("PORT"); p != "" {
+	if p := envFirst("WEITHG_TRACKER_PORT", "PORT"); p != "" {
 		if parsed, err := strconv.Atoi(p); err == nil {
 			port = parsed
 		}
 	}
 
-	frontendURL := os.Getenv("FRONTEND_URL")
-	if frontendURL == "" {
-		frontendURL = "http://localhost:5173"
+	frontendURL := envFirst("WEITHG_TRACKER_FRONTEND_URL", "FRONTEND_URL")
+
+	databaseURL := envFirst(
+		"WEITHG_TRACKER_DATABASE_URL",
+		"DATABASE_URL",
+		"CONNECTION_URI",
+	)
+	if databaseURL == "" {
+		databaseURL = databaseURLFromParts()
+	}
+	if databaseURL == "" {
+		panic(fmt.Errorf("WEITHG_TRACKER_DATABASE_URL or database connection parts are required"))
 	}
 
-	databaseURL := os.Getenv("DATABASE_URL")
-	if databaseURL == "" {
-		databaseURL = os.Getenv("CONNECTION_URI")
-	}
-	if databaseURL == "" {
-		panic(fmt.Errorf("DATABASE_URL environment variable is required"))
-	}
-
-	jwtSecret := os.Getenv("JWT_SECRET")
+	jwtSecret := envFirst("WEITHG_TRACKER_JWT_SECRET", "JWT_SECRET")
 	if jwtSecret == "" {
-		panic(fmt.Errorf("JWT_SECRET environment variable is required"))
+		panic(fmt.Errorf("WEITHG_TRACKER_JWT_SECRET environment variable is required"))
 	}
 
 	// 5 years session duration
@@ -51,4 +53,49 @@ func Load() *Config {
 		JWTSecret:       jwtSecret,
 		SessionDuration: sessionDuration,
 	}
+}
+
+func envFirst(keys ...string) string {
+	for _, key := range keys {
+		if value := os.Getenv(key); value != "" {
+			return value
+		}
+	}
+
+	return ""
+}
+
+func databaseURLFromParts() string {
+	host := envFirst("WEITHG_TRACKER_DB_HOST")
+	if host == "" {
+		host = "127.0.0.1"
+	}
+
+	port := envFirst("WEITHG_TRACKER_DB_PORT")
+	if port == "" {
+		port = "5432"
+	}
+
+	sslMode := envFirst("WEITHG_TRACKER_DB_SSLMODE")
+	if sslMode == "" {
+		sslMode = "disable"
+	}
+
+	databaseName := envFirst("WEITHG_TRACKER_DB_NAME")
+	user := envFirst("WEITHG_TRACKER_DB_USER")
+	password := envFirst("WEITHG_TRACKER_DB_PASSWORD")
+
+	if databaseName == "" || user == "" || password == "" {
+		return ""
+	}
+
+	return fmt.Sprintf(
+		"postgres://%s:%s@%s:%s/%s?sslmode=%s",
+		url.QueryEscape(user),
+		url.QueryEscape(password),
+		host,
+		port,
+		databaseName,
+		sslMode,
+	)
 }

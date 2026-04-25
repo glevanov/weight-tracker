@@ -98,10 +98,9 @@ func setupServiceContainer(t *testing.T, networkName string) (string, func()) {
 		Networks:     []string{networkName},
 		WaitingFor:   wait.ForListeningPort("3000/tcp").WithStartupTimeout(60 * time.Second),
 		Env: map[string]string{
-			"PORT":         "3000",
-			"FRONTEND_URL": "http://localhost:5173",
-			"DATABASE_URL": serviceDatabaseURL,
-			"JWT_SECRET":   "test-jwt-secret-key",
+			"WEITHG_TRACKER_PORT":         "3000",
+			"WEITHG_TRACKER_DATABASE_URL": serviceDatabaseURL,
+			"WEITHG_TRACKER_JWT_SECRET":   "test-jwt-secret-key",
 		},
 	}
 

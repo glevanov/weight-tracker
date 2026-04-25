@@ -8,7 +8,7 @@ import {
 } from "./util";
 import { getAuthHeader } from "./token";
 
-const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL ?? "/api";
 
 export const getWeights = async (range: Range): Promise<Response<Weight[]>> => {
   const { start, end } = mapRangeToDates(range);

@@ -23,24 +23,25 @@ func main() {
 	defer database.Disconnect()
 
 	r := chi.NewRouter()
+	if cfg.FrontendURL != "" {
+		r.Use(cors.Handler(cors.Options{
+			AllowedOrigins:   []string{cfg.FrontendURL},
+			AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+			AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
+			AllowCredentials: true,
+		}))
+	}
 
-	r.Use(cors.Handler(cors.Options{
-		AllowedOrigins:   []string{cfg.FrontendURL},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
-		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type"},
-		AllowCredentials: true,
-	}))
+	r.Route("/api", func(r chi.Router) {
+		r.Get("/health-check", handlers.HealthCheck)
+		r.Post("/login", handlers.Login(cfg))
 
-	// Public routes
-	r.Get("/health-check", handlers.HealthCheck)
-	r.Post("/login", handlers.Login(cfg))
-
-	// Protected routes (require authentication)
-	r.Group(func(r chi.Router) {
-		r.Use(auth.Middleware(cfg.JWTSecret))
-		r.Get("/weights", handlers.GetWeights)
-		r.Post("/weights", handlers.AddWeight)
-		r.Get("/session-check", handlers.SessionCheck)
+		r.Group(func(r chi.Router) {
+			r.Use(auth.Middleware(cfg.JWTSecret))
+			r.Get("/weights", handlers.GetWeights)
+			r.Post("/weights", handlers.AddWeight)
+			r.Get("/session-check", handlers.SessionCheck)
+		})
 	})
 
 	addr := fmt.Sprintf(":%d", cfg.Port)
