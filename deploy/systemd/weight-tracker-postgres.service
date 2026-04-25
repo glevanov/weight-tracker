@@ -1,0 +1,27 @@
+[Unit]
+Description=Weight Tracker PostgreSQL
+After=network.target
+
+[Service]
+Type=simple
+User=weighttracker-postgres
+Group=weighttracker-postgres
+EnvironmentFile=/etc/weight-tracker/weight-tracker.env
+RuntimeDirectory=weight-tracker-postgres
+RuntimeDirectoryMode=0750
+StateDirectory=weight-tracker-postgres
+StateDirectoryMode=0700
+ExecStart=/opt/weight-tracker/deploy/scripts/start-postgres.sh
+ExecReload=/bin/kill -HUP $MAINPID
+TimeoutStopSec=30
+KillMode=mixed
+KillSignal=SIGINT
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

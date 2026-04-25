@@ -1,0 +1,15 @@
+[Unit]
+Description=Initialize Weight Tracker PostgreSQL roles and database
+After=weight-tracker-postgres.service
+Requires=weight-tracker-postgres.service
+
+[Service]
+Type=oneshot
+User=weighttracker-postgres
+Group=weighttracker-postgres
+EnvironmentFile=/etc/weight-tracker/weight-tracker.env
+ExecStart=/opt/weight-tracker/deploy/scripts/init-postgres.sh
+RemainAfterExit=yes
+
+[Install]
+WantedBy=multi-user.target

@@ -1,0 +1,21 @@
+[Unit]
+Description=Weight Tracker App
+After=network.target weight-tracker-postgres.service weight-tracker-postgres-init.service
+Requires=weight-tracker-postgres.service weight-tracker-postgres-init.service
+
+[Service]
+Type=simple
+User=weighttracker
+Group=weighttracker
+WorkingDirectory=/opt/weight-tracker
+EnvironmentFile=/etc/weight-tracker/weight-tracker.env
+ExecStart=/opt/weight-tracker/weight-tracker
+Restart=always
+RestartSec=3
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target
