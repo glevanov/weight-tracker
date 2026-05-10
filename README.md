@@ -31,7 +31,7 @@ sudo cp deploy/config/weight-tracker.env.example /etc/weight-tracker/weight-trac
 sudo chmod 600 /etc/weight-tracker/weight-tracker.env
 ```
 
-All production variables are prefixed with `WEITHG_TRACKER_`.
+All production variables are prefixed with `WEIGHT_TRACKER_`.
 
 ## systemd services
 

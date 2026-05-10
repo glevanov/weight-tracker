@@ -18,16 +18,16 @@ type Config struct {
 
 func Load() *Config {
 	port := 3000
-	if p := envFirst("WEITHG_TRACKER_PORT", "PORT"); p != "" {
+	if p := envFirst("WEIGHT_TRACKER_PORT", "PORT"); p != "" {
 		if parsed, err := strconv.Atoi(p); err == nil {
 			port = parsed
 		}
 	}
 
-	frontendURL := envFirst("WEITHG_TRACKER_FRONTEND_URL", "FRONTEND_URL")
+	frontendURL := envFirst("WEIGHT_TRACKER_FRONTEND_URL", "FRONTEND_URL")
 
 	databaseURL := envFirst(
-		"WEITHG_TRACKER_DATABASE_URL",
+		"WEIGHT_TRACKER_DATABASE_URL",
 		"DATABASE_URL",
 		"CONNECTION_URI",
 	)
@@ -35,12 +35,12 @@ func Load() *Config {
 		databaseURL = databaseURLFromParts()
 	}
 	if databaseURL == "" {
-		panic(fmt.Errorf("WEITHG_TRACKER_DATABASE_URL or database connection parts are required"))
+		panic(fmt.Errorf("WEIGHT_TRACKER_DATABASE_URL or database connection parts are required"))
 	}
 
-	jwtSecret := envFirst("WEITHG_TRACKER_JWT_SECRET", "JWT_SECRET")
+	jwtSecret := envFirst("WEIGHT_TRACKER_JWT_SECRET", "JWT_SECRET")
 	if jwtSecret == "" {
-		panic(fmt.Errorf("WEITHG_TRACKER_JWT_SECRET environment variable is required"))
+		panic(fmt.Errorf("WEIGHT_TRACKER_JWT_SECRET environment variable is required"))
 	}
 
 	// 5 years session duration
@@ -66,24 +66,24 @@ func envFirst(keys ...string) string {
 }
 
 func databaseURLFromParts() string {
-	host := envFirst("WEITHG_TRACKER_DB_HOST")
+	host := envFirst("WEIGHT_TRACKER_DB_HOST")
 	if host == "" {
 		host = "127.0.0.1"
 	}
 
-	port := envFirst("WEITHG_TRACKER_DB_PORT")
+	port := envFirst("WEIGHT_TRACKER_DB_PORT")
 	if port == "" {
 		port = "5432"
 	}
 
-	sslMode := envFirst("WEITHG_TRACKER_DB_SSLMODE")
+	sslMode := envFirst("WEIGHT_TRACKER_DB_SSLMODE")
 	if sslMode == "" {
 		sslMode = "disable"
 	}
 
-	databaseName := envFirst("WEITHG_TRACKER_DB_NAME")
-	user := envFirst("WEITHG_TRACKER_DB_USER")
-	password := envFirst("WEITHG_TRACKER_DB_PASSWORD")
+	databaseName := envFirst("WEIGHT_TRACKER_DB_NAME")
+	user := envFirst("WEIGHT_TRACKER_DB_USER")
+	password := envFirst("WEIGHT_TRACKER_DB_PASSWORD")
 
 	if databaseName == "" || user == "" || password == "" {
 		return ""

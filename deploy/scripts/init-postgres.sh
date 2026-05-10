@@ -2,14 +2,14 @@
 
 set -euo pipefail
 
-db_port=${WEITHG_TRACKER_DB_PORT:-5432}
-db_name=${WEITHG_TRACKER_DB_NAME:-}
-db_user=${WEITHG_TRACKER_DB_USER:-}
-db_password=${WEITHG_TRACKER_DB_PASSWORD:-}
-admin_host=${WEITHG_TRACKER_PG_ADMIN_HOST:-/var/lib/weight-tracker-postgres}
+db_port=${WEIGHT_TRACKER_DB_PORT:-5432}
+db_name=${WEIGHT_TRACKER_DB_NAME:-}
+db_user=${WEIGHT_TRACKER_DB_USER:-}
+db_password=${WEIGHT_TRACKER_DB_PASSWORD:-}
+admin_host=${WEIGHT_TRACKER_PG_ADMIN_HOST:-/var/lib/weight-tracker-postgres}
 
 if [[ -z "$db_name" || -z "$db_user" || -z "$db_password" ]]; then
-  echo "WEITHG_TRACKER_DB_NAME, WEITHG_TRACKER_DB_USER and WEITHG_TRACKER_DB_PASSWORD are required"
+  echo "WEIGHT_TRACKER_DB_NAME, WEIGHT_TRACKER_DB_USER and WEIGHT_TRACKER_DB_PASSWORD are required"
   exit 1
 fi
 

@@ -10,10 +10,10 @@ if [[ -z "$postgres_bin" || -z "$initdb_bin" ]]; then
   exit 1
 fi
 
-PGDATA_DIR=${WEITHG_TRACKER_PGDATA:-/var/lib/weight-tracker-postgres/data}
-PGHOST_VALUE=${WEITHG_TRACKER_DB_HOST:-127.0.0.1}
-PGPORT_VALUE=${WEITHG_TRACKER_DB_PORT:-5432}
-PGSOCKET_DIR=${WEITHG_TRACKER_PG_SOCKET_DIR:-/var/lib/weight-tracker-postgres}
+PGDATA_DIR=${WEIGHT_TRACKER_PGDATA:-/var/lib/weight-tracker-postgres/data}
+PGHOST_VALUE=${WEIGHT_TRACKER_DB_HOST:-127.0.0.1}
+PGPORT_VALUE=${WEIGHT_TRACKER_DB_PORT:-5432}
+PGSOCKET_DIR=${WEIGHT_TRACKER_PG_SOCKET_DIR:-/var/lib/weight-tracker-postgres}
 
 install -d -m 0700 "$PGDATA_DIR"
 install -d -m 0770 "$PGSOCKET_DIR"
