@@ -3,7 +3,7 @@ module weight-tracker-migrator
 go 1.25.1
 
 require (
-	github.com/jackc/pgx/v5 v5.9.1
+	github.com/jackc/pgx/v5 v5.9.2
 	go.mongodb.org/mongo-driver v1.17.9
 )
 
