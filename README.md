@@ -12,6 +12,8 @@ https://github.com/user-attachments/assets/93f8ff24-d9c4-456a-ae0d-7f525da89009
 - `apps/backend` - Go backend service
 - `apps/database` - database for development
 
+There used to be a mongo migrator, see commit 153b631d69de.
+
 ## Production build
 
 Build frontend and backend into one Linux binary:
