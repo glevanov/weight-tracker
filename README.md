@@ -10,6 +10,7 @@ https://github.com/user-attachments/assets/93f8ff24-d9c4-456a-ae0d-7f525da89009
 
 - `apps/frontend` - Svelte frontend
 - `apps/backend` - Go backend service
+- `apps/database` - database for development
 
 ## Production build
 
@@ -31,7 +32,7 @@ sudo cp deploy/config/weight-tracker.env.example /etc/weight-tracker/weight-trac
 sudo chmod 600 /etc/weight-tracker/weight-tracker.env
 ```
 
-All production variables are prefixed with `WEIGHT_TRACKER_`.
+All production variables are prefixed with `WEITHG_TRACKER_`.
 
 ## systemd services
 
@@ -74,3 +75,17 @@ Check status and logs:
 sudo systemctl status weight-tracker.service
 sudo journalctl -u weight-tracker.service -f
 ```
+
+## PostgreSQL major upgrade
+
+### Develompent upgrade
+```bash
+cd apps/database
+make backup
+# stop service, bump docker tag
+make restore
+```
+
+### Production upgrade
+
+TODO
