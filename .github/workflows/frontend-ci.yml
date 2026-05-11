@@ -20,15 +20,15 @@ jobs:
         working-directory: apps/frontend
     steps:
       - name: Checkout
-        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98
+        uses: actions/checkout@0c366fd6a839edf440554fa01a7085ccba70ac98 # v4
 
       - name: Node
-        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v4
         with:
           node-version: 24
 
       - name: pnpm
-        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320
+        uses: pnpm/action-setup@fc06bc1257f339d1d5d8b3a19a8cae5388b55320 # v4
 
       - name: Install
         run: pnpm install
