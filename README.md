@@ -82,7 +82,7 @@ sudo journalctl -u weight-tracker.service -f
 ```bash
 cd apps/database
 make backup
-# stop service, bump docker tag
+# stop service, bump docker tag, remove volume
 make restore
 ```
 
