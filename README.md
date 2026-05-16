@@ -34,7 +34,21 @@ sudo cp deploy/config/weight-tracker.env.example /etc/weight-tracker/weight-trac
 sudo chmod 600 /etc/weight-tracker/weight-tracker.env
 ```
 
-All production variables are prefixed with `WEITHG_TRACKER_`.
+All production variables are prefixed with `WEIGHT_TRACKER_`.
+
+## postgres dependencies
+
+Make sure you have postgres before starting the process:
+
+```bash
+# Check where binaries are
+command -v postgres || true
+command -v initdb || true
+command -v psql || true
+
+# If you do not have postgres, install the dependencies
+sudo dnf install -y postgresql-server postgresql
+```
 
 ## systemd services
 
@@ -78,16 +92,42 @@ sudo systemctl status weight-tracker.service
 sudo journalctl -u weight-tracker.service -f
 ```
 
+## Backups and restore (production)
+
+Run backup/restore after services are installed and the PostgreSQL service is running.
+
+Create a timestamped backup:
+
+```bash
+set -a
+source /etc/weight-tracker/weight-tracker.env
+set +a
+
+ts=$(date +%Y%m%d-%H%M%S)
+backup_file="backups/${WEIGHT_TRACKER_DB_NAME}-${ts}.sql"
+mkdir -p backups
+
+PGPASSWORD="$WEIGHT_TRACKER_DB_PASSWORD" pg_dump -h "$WEIGHT_TRACKER_DB_HOST" -p "$WEIGHT_TRACKER_DB_PORT" -U "$WEIGHT_TRACKER_DB_USER" -d "$WEIGHT_TRACKER_DB_NAME" --no-owner --no-privileges > "$backup_file"
+
+printf 'Backup written to %s\n' "$backup_file"
+```
+
+Restore from a backup (includes app stop/start):
+
+```bash
+sudo /opt/weight-tracker/deploy/scripts/restore-postgres.sh /path/to/weight-tracker-backup.sql
+```
+
+Script source:
+
+- `deploy/scripts/restore-postgres.sh`
+
 ## PostgreSQL major upgrade
 
-### Develompent upgrade
+### Development upgrade
 ```bash
 cd apps/database
 make backup
 # stop service, bump docker tag, remove volume
 make restore
 ```
-
-### Production upgrade
-
-TODO
