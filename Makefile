@@ -5,6 +5,7 @@ SHELL := /bin/bash
 PROD_BINARY := build/weight-tracker
 FRONTEND_DIST := apps/frontend/dist
 BACKEND_EMBED_DIST := apps/backend/internal/static/dist
+BUILD_BASE := /weight-tracker
 
 pre-commit:
 	pnpm --dir apps/frontend run lint
@@ -27,7 +28,7 @@ dev-database-down:
 
 build-prod: clean-prod
 	pnpm --dir apps/frontend install --frozen-lockfile
-	pnpm --dir apps/frontend run build
+	VITE_API_URL=$(BUILD_BASE)/api pnpm --dir apps/frontend run build --base $(BUILD_BASE)/
 	mkdir -p apps/backend/internal/static
 	mkdir -p $(BACKEND_EMBED_DIST)
 	rm -rf $(BACKEND_EMBED_DIST)/*

@@ -122,6 +122,19 @@ Script source:
 
 - `deploy/scripts/restore-postgres.sh`
 
+## Update the binary
+Likely you'll need to reapply permissions
+
+```bash
+sudo systemctl stop weight-tracker.service
+sudo chown weighttracker:weighttracker /opt/weight-tracker/weight-tracker
+sudo chmod 755 /opt/weight-tracker
+sudo chmod 755 /opt/weight-tracker/weight-tracker
+sudo systemctl start weight-tracker.service
+# (optional) fix SE Linux labels issue
+sudo restorecon -RFv /opt/weight-tracker
+```
+
 ## PostgreSQL major upgrade
 
 ### Development upgrade
