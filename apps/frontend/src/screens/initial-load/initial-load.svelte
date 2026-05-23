@@ -7,21 +7,29 @@
   import { i18n } from "../../store/language";
   import { acquireWakeLock, releaseWakeLock } from "./wake-lock";
 
-  onMount(async () => {
+  const SPLASH_TIMEOUT = 1200;
+
+  const waitForMinimumSplashDuration = (): Promise<void> =>
+    new Promise<void>((resolve) => setTimeout(resolve, SPLASH_TIMEOUT));
+
+  const resolveNextScreen = async (): Promise<"addWeight" | "login" | "error"> => {
     const healthCheckResult = await checkHealth();
-    await releaseWakeLock();
     if (!healthCheckResult.isSuccess) {
-      switchScreen("error");
-      return;
+      return "error";
     }
 
     const hasSession = await checkSession();
+    return hasSession ? "addWeight" : "login";
+  };
 
-    if (hasSession) {
-      switchScreen("addWeight");
-    } else {
-      switchScreen("login");
-    }
+  onMount(async () => {
+    const [nextScreen] = await Promise.all([
+      resolveNextScreen(),
+      waitForMinimumSplashDuration(),
+    ]);
+
+    await releaseWakeLock();
+    switchScreen(nextScreen);
   });
 </script>
 
