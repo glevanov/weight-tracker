@@ -3,6 +3,7 @@ import type { Response, Weight } from "./types";
 import {
   extractResult,
   getAcceptLanguage,
+  getTranslation,
   handleAuthError,
   mapRangeToDates,
 } from "./util";
@@ -96,7 +97,7 @@ export const checkHealth = async (): Promise<Response<string>> => {
       if (response.status === 200) {
         return {
           isSuccess: true,
-          data: "Сервис доступен",
+          data: getTranslation("initialLoading.healthAvailable"),
         };
       }
     } catch {
@@ -105,6 +106,6 @@ export const checkHealth = async (): Promise<Response<string>> => {
   }
   return {
     isSuccess: false,
-    error: "Сервис недоступен",
+    error: getTranslation("initialLoading.healthUnavailable"),
   };
 };

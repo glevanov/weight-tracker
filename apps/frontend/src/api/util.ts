@@ -1,6 +1,7 @@
 import { get } from "svelte/store";
 
 import type { Range } from "../screens/chart/types";
+import { i18n } from "../i18n/i18n";
 import type { Response, Token } from "./types";
 import { switchScreen } from "../store/screen";
 import { language } from "../store/language";
@@ -67,7 +68,7 @@ export const extractResult = async <Data>(
 
     return result;
   } catch {
-    return { isSuccess: false, error: "Произошла неизвестная ошибка" };
+    return { isSuccess: false, error: getTranslation("common.unknownError") };
   }
 };
 
@@ -78,6 +79,9 @@ export const handleAuthError = (response: globalThis.Response) => {
 };
 
 export const getAcceptLanguage = () => get(language);
+
+export const getTranslation = (path: Parameters<typeof i18n>[1]) =>
+  i18n(getAcceptLanguage(), path);
 
 export const isToken = (token: unknown): token is Token => {
   if (typeof token !== "object" || token === null) {

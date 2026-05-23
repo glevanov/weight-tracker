@@ -30,7 +30,12 @@ export const en: Locale = {
   initialLoading: {
     loading: "Warming up the server! This may take a few minutes.",
     wakeLock: "Acquire wake lock",
+    healthAvailable: "Service is available",
+    healthUnavailable: "Service is unavailable",
     failed:
       "Failed to warm up the server. Try refreshing the page or come back later.",
+  },
+  common: {
+    unknownError: "An unknown error occurred",
   },
 };

@@ -30,7 +30,12 @@ export const sv: Locale = {
   initialLoading: {
     loading: "Startar servern! Detta kan ta några minuter.",
     wakeLock: "Förhindra skärmlåsning",
+    healthAvailable: "Tjänsten är tillgänglig",
+    healthUnavailable: "Tjänsten är inte tillgänglig",
     failed:
       "Misslyckades med att starta servern. Försök att uppdatera sidan eller kom tillbaka senare.",
+  },
+  common: {
+    unknownError: "Ett okänt fel uppstod",
   },
 };
