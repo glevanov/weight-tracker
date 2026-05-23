@@ -87,15 +87,28 @@
   };
 
   let ref: HTMLCanvasElement | undefined = $state();
+  let chart: ChartJS<"line"> | undefined = $state();
 
   $effect(() => {
-    if (ref) {
-      new ChartJS(ref, {
-        type: "line",
-        data: chartData,
-        options,
-      });
-    }
+    if (!ref) return;
+
+    chart = new ChartJS(ref, {
+      type: "line",
+      data: { labels: [], datasets: [] },
+      options,
+    });
+
+    return () => {
+      chart?.destroy();
+      chart = undefined;
+    };
+  });
+
+  $effect(() => {
+    if (!chart) return;
+
+    chart.data = chartData;
+    chart.update();
   });
 </script>
 
