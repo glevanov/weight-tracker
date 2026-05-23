@@ -12,7 +12,9 @@
   const waitForMinimumSplashDuration = (): Promise<void> =>
     new Promise<void>((resolve) => setTimeout(resolve, SPLASH_TIMEOUT));
 
-  const resolveNextScreen = async (): Promise<"addWeight" | "login" | "error"> => {
+  const resolveNextScreen = async (): Promise<
+    "addWeight" | "login" | "error"
+  > => {
     const healthCheckResult = await checkHealth();
     if (!healthCheckResult.isSuccess) {
       return "error";
