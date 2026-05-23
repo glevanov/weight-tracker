@@ -123,16 +123,20 @@ Script source:
 - `deploy/scripts/restore-postgres.sh`
 
 ## Update the binary
-Likely you'll need to reapply permissions
+Binary update requires some manual steps.
 
+- Stop the service
 ```bash
 sudo systemctl stop weight-tracker.service
-sudo chown weighttracker:weighttracker /opt/weight-tracker/weight-tracker
-sudo chmod 755 /opt/weight-tracker
-sudo chmod 755 /opt/weight-tracker/weight-tracker
+```
+- Replace the binary
+- Run script to re-apply correct permissions
+```bash
+sudo sh /opt/weight-tracker/deploy/scripts/restore-owner.sh
+```
+- Start the service
+```bash
 sudo systemctl start weight-tracker.service
-# (optional) fix SE Linux labels issue
-sudo restorecon -RFv /opt/weight-tracker
 ```
 
 ## PostgreSQL major upgrade
