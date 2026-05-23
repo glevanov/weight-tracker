@@ -43,8 +43,9 @@
     <label for="login">{$i18n("login.login")}</label>
     <input
       class="g-input"
+      autocomplete="username"
       type="text"
-      name="login"
+      name="username"
       id="login"
       bind:value={username}
     />
@@ -52,6 +53,7 @@
     <label class="withGap" for="password">{$i18n("login.password")}</label>
     <input
       class="g-input"
+      autocomplete="current-password"
       type="password"
       name="password"
       id="password"
