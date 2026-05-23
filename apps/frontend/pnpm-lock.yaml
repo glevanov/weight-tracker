@@ -22,8 +22,8 @@ importers:
         version: 5.55.5
     devDependencies:
       '@sveltejs/vite-plugin-svelte':
-        specifier: 7.0.0
-        version: 7.0.0(svelte@5.55.5)(vite@8.0.11(@types/node@25.5.0))
+        specifier: 7.1.2
+        version: 7.1.2(svelte@5.55.5)(vite@8.0.11(@types/node@25.5.0))
       '@testing-library/svelte':
         specifier: 5.3.1
         version: 5.3.1(svelte@5.55.5)(vite@8.0.11(@types/node@25.5.0))(vitest@4.1.5(@types/node@25.5.0)(happy-dom@20.9.0)(vite@8.0.11(@types/node@25.5.0)))
@@ -386,8 +386,8 @@ packages:
     peerDependencies:
       acorn: ^8.9.0
 
-  '@sveltejs/vite-plugin-svelte@7.0.0':
-    resolution: {integrity: sha512-ILXmxC7HAsnkK2eslgPetrqqW1BKSL7LktsFgqzNj83MaivMGZzluWq32m25j2mDOjmSKX7GGWahePhuEs7P/g==}
+  '@sveltejs/vite-plugin-svelte@7.1.2':
+    resolution: {integrity: sha512-DrUBA2UXRfDmUX/ZTiEopd3X40yavsJF1FX2RygcuIScHL7o5YX1fMvoYnDhjeJQC4weCOklirpNWlcb2NiSeA==}
     engines: {node: ^20.19 || ^22.12 || >=24}
     peerDependencies:
       svelte: ^5.46.4
@@ -1561,7 +1561,7 @@ snapshots:
     dependencies:
       acorn: 8.12.1
 
-  '@sveltejs/vite-plugin-svelte@7.0.0(svelte@5.55.5)(vite@8.0.11(@types/node@25.5.0))':
+  '@sveltejs/vite-plugin-svelte@7.1.2(svelte@5.55.5)(vite@8.0.11(@types/node@25.5.0))':
     dependencies:
       deepmerge: 4.3.1
       magic-string: 0.30.21
