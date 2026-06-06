@@ -3,7 +3,7 @@
   "extends": ["config:recommended", "helpers:pinGitHubActionDigests"],
   "automerge": false,
   "internalChecksFilter": "strict",
-  "minimumReleaseAge": "2 weeks",
+  "minimumReleaseAge": "5 days",
   "packageRules": [
     {
       "matchManagers": ["github-actions"],
