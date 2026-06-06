@@ -120,8 +120,9 @@
   .chart {
     --button-height: 30px;
 
-    width: 100%;
-    max-height: calc(100% - var(--button-height));
+    position: relative;
+    width: calc(100vw - 2em);
+    height: calc(100% - var(--button-height));
     box-sizing: border-box;
     display: flex;
     justify-content: center;
