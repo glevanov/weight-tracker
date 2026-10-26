@@ -13,6 +13,30 @@ if [[ -z "$db_name" || -z "$db_user" || -z "$db_password" ]]; then
   exit 1
 fi
 
+# systemd's After= on a Type=simple service only waits for the process to be
+# spawned, not for PostgreSQL to accept connections. Without this wait the
+# script races the server at boot, fails permanently (the unit is
+# Type=oneshot) and takes the app down with it.
+wait_seconds=${WEIGHT_TRACKER_PG_WAIT_SECONDS:-60}
+
+if ! command -v pg_isready >/dev/null 2>&1; then
+  echo "pg_isready not found (install the postgresql client package)"
+  exit 1
+fi
+
+echo "Waiting for PostgreSQL at ${admin_host}:${db_port} (up to ${wait_seconds}s)"
+for ((attempt = 1; attempt <= wait_seconds; attempt++)); do
+  if pg_isready -h "$admin_host" -p "$db_port" -q; then
+    break
+  fi
+  sleep 1
+done
+
+if ! pg_isready -h "$admin_host" -p "$db_port" -q; then
+  echo "PostgreSQL is not accepting connections on ${admin_host}:${db_port} after ${wait_seconds}s"
+  exit 1
+fi
+
 psql_cmd=(psql -h "$admin_host" -p "$db_port" -d postgres -v ON_ERROR_STOP=1)
 
 script_dir=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)

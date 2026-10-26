@@ -45,6 +45,7 @@ Make sure you have postgres before starting the process:
 command -v postgres || true
 command -v initdb || true
 command -v psql || true
+command -v pg_isready || true
 
 # If you do not have postgres, install the dependencies
 sudo dnf install -y postgresql-server postgresql
